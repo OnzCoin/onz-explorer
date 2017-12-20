@@ -2,7 +2,7 @@ module.exports = [
 	{
 		endpoint: 'getAccount',
 		service: 'accounts',
-		params: { address: '12907382053545086321L' },
+		params: { address: '12907382053545086321Z' },
 	}, {
 		endpoint: 'getTopAccounts',
 		service: 'accounts',

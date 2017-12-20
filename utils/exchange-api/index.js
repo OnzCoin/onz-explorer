@@ -59,7 +59,7 @@ module.exports = function (config) {
 				},
 			],
 		},
-		LSKBTC: {
+		ONZBTC: {
 			poloniex: [
 				'Poloniex',
 				'https://poloniex.com/public?command=returnTicker',
@@ -71,7 +71,7 @@ module.exports = function (config) {
 				},
 			],
 		},
-		LSKCNY: {
+		ONZCNY: {
 			jubi: [
 				'Jubi',
 				'https://www.jubi.com/api/v1/ticker/?coin=lsk',
@@ -139,7 +139,7 @@ module.exports = function (config) {
 	});
 
 	return {
-		getPriceTicker: (cb) => {
+		getPriceTicker: cb => {
 			const currency = {};
 			const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n);
 

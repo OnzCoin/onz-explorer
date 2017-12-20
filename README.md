@@ -1,13 +1,13 @@
-# Lisk Blockchain Explorer
+# Onz Blockchain Explorer
 
-Lisk Explorer version 1.4.1 works in conjunction with the Lisk Core API. It uses Redis for caching data and Freegeoip to parse IP geo-location data.
+Onz Explorer version 1.4.1 works in conjunction with the Onz Core API. It uses Redis for caching data and Freegeoip to parse IP geo-location data.
 
-[![Build Status](https://travis-ci.org/LiskHQ/lisk-explorer.svg?branch=development)](https://travis-ci.org/LiskHQ/lisk-explorer)
+[![Build Status](https://travis-ci.org/OnzCoin/onz-explorer.svg?branch=development)](https://travis-ci.org/OnzCoin/onz-explorer)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
 ## Prerequisites
 
-These programs and resources are required to install and run Lisk Explorer
+These programs and resources are required to install and run Onz Explorer
 
 - Nodejs v6.10.1 or higher (<https://nodejs.org/>) -- Nodejs serves as the underlying engine for code execution.
 
@@ -33,7 +33,7 @@ These programs and resources are required to install and run Lisk Explorer
 
   `sudo npm install -g grunt`
 
-- PM2 (https://github.com/Unitech/pm2) -- PM2 manages the node process for Lisk Explorer and handles log rotation (Highly Recommended)
+- PM2 (https://github.com/Unitech/pm2) -- PM2 manages the node process for Onz Explorer and handles log rotation (Highly Recommended)
 
   `sudo npm install -g pm2`
   
@@ -44,7 +44,7 @@ These programs and resources are required to install and run Lisk Explorer
   pm2 set pm2-logrotate:max_size 100M
   ```
 
-- Git (<https://github.com/git/git>) -- Used for cloning and updating Lisk Explorer
+- Git (<https://github.com/git/git>) -- Used for cloning and updating Onz Explorer
 
   `sudo apt-get install -y git`
 
@@ -54,18 +54,18 @@ These programs and resources are required to install and run Lisk Explorer
 
 ## Installation Steps
 
-Clone the Lisk Explorer Repository:
+Clone the Onz Explorer Repository:
 
 ```
-git clone https://github.com/LiskHQ/lisk-explorer.git
-cd lisk-explorer
+git clone https://github.com/OnzCoin/onz-explorer.git
+cd onz-explorer
 npm install
 ```
 
 ## Build Steps
 
 #### Frontend
- The frontend is using Webpack to create core bundles for Lisk Explorer.  
+ The frontend is using Webpack to create core bundles for Onz Explorer.  
  
  For having a watcher to generate bundles continuously for all the changes of the code, Run the following command:
 
@@ -82,7 +82,7 @@ npm install
 
 
 #### Market Watcher
- Candlestick data needs to be initialized prior to starting Lisk Explorer. During runtime candlestick data is updated automatically.
+ Candlestick data needs to be initialized prior to starting Onz Explorer. During runtime candlestick data is updated automatically.
 
 To build candlestick data for each exchange run:
 
@@ -94,11 +94,11 @@ To update candlestick data manually run after initialization:
 
 ## Configuration
 
-The default `config.js` file contains all of the configuration settings for Lisk Explorer. These options can be modified according to comments included in configuration file.
+The default `config.js` file contains all of the configuration settings for Onz Explorer. These options can be modified according to comments included in configuration file.
 
 #### Top Accounts
 
-To enable Top Accounts functionality, edit your Lisk Client config.json _(not the explorer)_:
+To enable Top Accounts functionality, edit your Onz Client config.json _(not the explorer)_:
 
 ```
 {
@@ -107,19 +107,19 @@ To enable Top Accounts functionality, edit your Lisk Client config.json _(not th
     "version": "0.5.0",
     "minVersion": "~0.5.0",
     "fileLogLevel": "info",
-    "logFileName": "logs/lisk.log",
+    "logFileName": "logs/onz.log",
     "consoleLogLevel": "info",
     "trustProxy": false,
     "topAccounts": false, <--- This line needs to be changed to read true
 ```
 
-After the change is made the Lisk Client will need to be restarted. (Example):
+After the change is made the Onz Client will need to be restarted. (Example):
 
-`bash /PATH_TO_LISK_DIR/lisk.sh reload`
+`bash /PATH_TO_ONZ_DIR/onz.sh reload`
 
-## Managing Lisk Explorer
+## Managing Onz Explorer
 
-To test that Lisk Explorer is configured correctly, run the following command:
+To test that Onz Explorer is configured correctly, run the following command:
 
 `node app.js`
 
@@ -135,25 +135,25 @@ After the process is started its runtime status and log location can be found by
 
 To stop Explorer after it has been started with `PM2`, issue the following command:
 
-`pm2 stop lisk-explorer`
+`pm2 stop onz-explorer`
 
 ## Tests
 
-Before running any tests, please ensure Lisk Explorer and Lisk Client are configured to run on the Lisk Testnet.
+Before running any tests, please ensure Onz Explorer and Onz Client are configured to run on the Onz Testnet.
 
 Replace **config.js** with **config.test** file from the **test** directory:
 
 `cp test/config.test ./config.js`
 
-Replace the **config.json** for the Lisk Client the corresponding file under the **test** directory:
+Replace the **config.json** for the Onz Client the corresponding file under the **test** directory:
 
-`cp test/config_lisk.json  /PATH_TO_LISK_DIR/config.json`
+`cp test/config_onz.json  /PATH_TO_ONZ_DIR/config.json`
 
-Then restart the Lisk Client (example):
+Then restart the Onz Client (example):
 
-`pm2 restart /PATH_TO_LISK_DIR/app.js`
+`pm2 restart /PATH_TO_ONZ_DIR/app.js`
 
-Launch Lisk Explorer (runs on port 6040):
+Launch Onz Explorer (runs on port 6040):
 
 `pm2 start pm2-explorer.json`
 
@@ -188,7 +188,7 @@ Setup protractor
 ### Run end-to-end test suite:
 
 ```
-./e2e-test-setup.sh /PATH_TO_LISK_DIR
+./e2e-test-setup.sh /PATH_TO_ONZ_DIR
 npm run e2e-test -s
 ```
 
@@ -200,19 +200,19 @@ npm run e2e-test -s -- --specs=features/address.feature
 
 ## License
 
-Copyright © 2016-2017 Lisk Foundation
+Copyright © 2016-2017 Onz Foundation
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the [GNU General Public License](https://github.com/LiskHQ/lisk-explorer/tree/master/LICENSE) along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the [GNU General Public License](https://github.com/OnzCoin/onz-explorer/tree/master/LICENSE) along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ***
 
-This program also incorporates work previously released with lisk-explorer `1.1.0` (and earlier) versions under the [MIT License](https://opensource.org/licenses/MIT). To comply with the requirements of that license, the following permission notice, applicable to those parts of the code only, is included below:
+This program also incorporates work previously released with onz-explorer `1.1.0` (and earlier) versions under the [MIT License](https://opensource.org/licenses/MIT). To comply with the requirements of that license, the following permission notice, applicable to those parts of the code only, is included below:
 
-Copyright © 2016-2017 Lisk Foundation  
+Copyright © 2016-2017 Onz Foundation  
 Copyright © 2015 Crypti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:

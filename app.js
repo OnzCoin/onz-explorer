@@ -39,7 +39,7 @@ app.orders = new utils.orders(config, client);
 
 app.set('version', '0.3');
 app.set('strict routing', true);
-app.set('lisk address', `http://${config.lisk.host}:${config.lisk.port}`);
+app.set('onz address', `http://${config.onz.host}:${config.onz.port}`);
 app.set('freegeoip address', `http://${config.freegeoip.host}:${config.freegeoip.port}`);
 app.set('exchange enabled', config.exchangeRates.enabled);
 
@@ -66,7 +66,7 @@ app.use(morgan('combined', {
 	skip(req, res) {
 		return parseInt(res.statusCode, 10) < 400;
 	},
-	stream: split().on('data', (data) => {
+	stream: split().on('data', data => {
 		logger.error(data);
 	}),
 }));
@@ -74,7 +74,7 @@ app.use(morgan('combined', {
 	skip(req, res) {
 		return parseInt(res.statusCode, 10) >= 400;
 	},
-	stream: split().on('data', (data) => {
+	stream: split().on('data', data => {
 		logger.info(data);
 	}),
 }));
@@ -151,13 +151,13 @@ app.use((req, res, next) => {
 	if (cache.cacheIgnoreList.indexOf(req.originalUrl) >= 0) {
 		return res.json(req.json);
 	}
-	req.redis.set(req.originalUrl, JSON.stringify(req.json), (err) => {
+	req.redis.set(req.originalUrl, JSON.stringify(req.json), err => {
 		if (err) {
 			logger.info(err);
 		} else {
 			const ttl = cache.cacheTTLOverride[req.originalUrl] || config.cacheTTL;
 
-			req.redis.send_command('EXPIRE', [req.originalUrl, ttl], (expErr) => {
+			req.redis.send_command('EXPIRE', [req.originalUrl, ttl], expErr => {
 				if (expErr) {
 					logger.info(expErr);
 				}
@@ -176,16 +176,16 @@ app.get('*', (req, res, next) => {
 });
 
 async.parallel([
-	(cb) => {
+	cb => {
 		app.exchange.loadRates();
 		cb(null);
 	},
 ], () => {
-	const server = app.listen(app.get('port'), app.get('host'), (err) => {
+	const server = app.listen(app.get('port'), app.get('host'), err => {
 		if (err) {
 			logger.info(err);
 		} else {
-			logger.info(`Lisk Explorer started at ${app.get('host')}:${app.get('port')}`);
+			logger.info(`Onz Explorer started at ${app.get('host')}:${app.get('port')}`);
 
 			const io = require('socket.io').listen(server);
 			require('./sockets')(app, io);

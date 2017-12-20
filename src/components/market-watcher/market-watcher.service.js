@@ -28,7 +28,7 @@ const MarketWatcher = function ($q, $http, $rootScope, vm) {
 	};
 
 	const getData = () => {
-		$q.all([getCandles(), getStatistics(), getOrders()]).then((results) => {
+		$q.all([getCandles(), getStatistics(), getOrders()]).then(results => {
 			if (results[0] && results[0].data) {
 				vm.candles = results[0].data.candles;
 				$rootScope.$broadcast('$candlesUpdated');
@@ -45,11 +45,11 @@ const MarketWatcher = function ($q, $http, $rootScope, vm) {
 	};
 
 	const getExchanges = () => {
-		$http.get('/api/exchanges').then((result) => {
+		$http.get('/api/exchanges').then(result => {
 			if (result.data.success) {
 				vm.exchangeLogos = {};
-				vm.exchanges = Object.keys(result.data.exchanges).filter((key) => {
-					System.import(`../../assets/img/exchanges/${key}.png`).then((value) => {
+				vm.exchanges = Object.keys(result.data.exchanges).filter(key => {
+					System.import(`../../assets/img/exchanges/${key}.png`).then(value => {
 						vm.exchangeLogos[key] = value;
 					});
 					if (result.data.exchanges[key]) return key;
@@ -68,7 +68,7 @@ const MarketWatcher = function ($q, $http, $rootScope, vm) {
 		});
 	};
 
-	vm.setTab = (tab) => {
+	vm.setTab = tab => {
 		vm.oldTab = vm.tab;
 		vm.tab = tab;
 
@@ -87,7 +87,7 @@ const MarketWatcher = function ($q, $http, $rootScope, vm) {
 		return vm.setDuration(duration);
 	};
 
-	vm.setDuration = (duration) => {
+	vm.setDuration = duration => {
 		vm.oldDuration = vm.duration;
 		vm.duration = (duration || vm.duration || 'hour');
 		vm.newDuration = (vm.duration !== vm.oldDuration);
@@ -108,7 +108,7 @@ const MarketWatcher = function ($q, $http, $rootScope, vm) {
 };
 
 AppMarketWatcher.factory('marketWatcher',
-	($q, $http, $socket, $rootScope) => (vm) => {
+	($q, $http, $socket, $rootScope) => vm => {
 		const marketWatcher = new MarketWatcher($q, $http, $rootScope, vm);
 		const ns = $socket('/marketWatcher');
 

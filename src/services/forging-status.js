@@ -1,7 +1,7 @@
 import AppServices from './services.module';
 
 AppServices.service('forgingStatus',
-	($rootScope, epochStampFilter, roundFilter) => (delegate) => {
+	($rootScope, epochStampFilter, roundFilter) => delegate => {
 		const status = { updatedAt: delegate.blocksAt };
 
 		// if (delegate.blocksAt && _.size(delegate.blocks) > 0) {

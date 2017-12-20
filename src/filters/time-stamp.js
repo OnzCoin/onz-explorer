@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('timestamp', epochStampFilter => (timestamp) => {
+AppFilters.filter('timestamp', epochStampFilter => timestamp => {
 	const stamp = epochStampFilter(timestamp);
 	let month = stamp.getMonth() + 1;
 

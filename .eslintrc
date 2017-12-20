@@ -1,6 +1,6 @@
 {
 	"extends": [
-		"lisk-base"
+		"onz-base"
 	],
 	"plugins": [
 		"import",

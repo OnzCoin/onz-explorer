@@ -9,7 +9,7 @@ const AddressConstructor = function ($rootScope, $stateParams, $location, $http,
 			params: {
 				address: $stateParams.address,
 			},
-		}).then((resp) => {
+		}).then(resp => {
 			if (resp.data.success) {
 				vm.address = resp.data;
 			} else {
@@ -25,7 +25,7 @@ const AddressConstructor = function ($rootScope, $stateParams, $location, $http,
 	};
 
 	// Sets the filter for which transactions to display
-	vm.filterTxs = (direction) => {
+	vm.filterTxs = direction => {
 		vm.direction = direction;
 		vm.txs = addressTxs({ address: $stateParams.address, direction });
 	};
@@ -69,7 +69,7 @@ const AddressConstructor = function ($rootScope, $stateParams, $location, $http,
 		}
 	};
 
-	const searchByParams = (params) => {
+	const searchByParams = params => {
 		if (vm.direction !== 'search') {
 			vm.lastDirection = vm.direction;
 			vm.direction = 'search';
@@ -83,7 +83,7 @@ const AddressConstructor = function ($rootScope, $stateParams, $location, $http,
 
 	$rootScope.$on('advanced-searchbox:modelUpdated', (event, model) => {
 		const params = {};
-		Object.keys(model).forEach((key) => {
+		Object.keys(model).forEach(key => {
 			if (model[key] !== undefined && model[key] !== '') {
 				params[key] = model[key];
 			}

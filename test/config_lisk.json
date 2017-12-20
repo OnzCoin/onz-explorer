@@ -4,7 +4,7 @@
     "version": "0.8.2b",
     "minVersion": ">=0.5.0",
     "fileLogLevel": "info",
-    "logFileName": "logs/lisk.log",
+    "logFileName": "logs/onz.log",
     "consoleLogLevel": "info",
     "trustProxy": false,
     "topAccounts": true,
@@ -12,7 +12,7 @@
     "db": {
         "host": "localhost",
         "port": 5432,
-        "database": "lisk_test",
+        "database": "onz_test",
         "user": "",
         "password": "password",
         "poolSize": 95,
@@ -109,8 +109,8 @@
         "options": {
             "port": 443,
             "address": "0.0.0.0",
-            "key": "./ssl/lisk.key",
-            "cert": "./ssl/lisk.crt"
+            "key": "./ssl/onz.key",
+            "cert": "./ssl/onz.crt"
         }
     },
     "dapp": {
@@ -118,5 +118,5 @@
         "masterpassword": "",
         "autoexec": []
     },
-    "nethash": "da3ed6a45429278bac2666961289ca17ad86595d33b31037615d4b8e8f158bba"
+    "nethash": "843351db5e4434c7660035204456c2cb30d362f0fb4aaa30e0c20d6f4d197fda"
 }

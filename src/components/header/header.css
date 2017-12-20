@@ -12,7 +12,7 @@
 .navbar-brand .logo {
   height: 35px;
   width: 76px;
-  background: url('../../assets/img/lisk-logo.svg');
+  background: url('../../assets/img/onz-logo.svg');
   background-size: auto 35px;
 }
 
@@ -49,7 +49,7 @@
 
 .navbar-default .navbar-form form
 {
-  border-bottom: solid 1px #7b7c7e;
+  border-bottom: solid 1px #fff;
   position: relative;
   outline: none;
 }
@@ -72,7 +72,7 @@
 .navbar-default .navbar-form .glyphicon
 {
   font-size: 20px;
-  color: #7b7c7e;
+  color: #fff;
   padding: 7px 5px;
   vertical-align: middle;
 }
@@ -96,13 +96,13 @@
 }
 
 #search::-webkit-input-placeholder {
-  color: #a3a4a6;
+  color: #fff;
   font-size: 14px;
   font-family: 'Roboto', 'Ubuntu', sans-serif;
 }
 
 #search::-moz-placeholder {
-  color: #a3a4a6;
+  color: #fff;
   font-size: 14px;
   font-family: 'Roboto', 'Ubuntu', sans-serif;
 }
@@ -113,7 +113,7 @@
 }
 .navbar-fixed-top .network-status {
   width: 100%;
-  background: #464647;
+  background: #fff;
   position: relative;
   z-index: 1;
 }
@@ -132,10 +132,11 @@
  }
 
 .navbar-fixed-top .network-status span {
-  color: #a3a4a6;
-  line-height: 24px;
+  color: #8089ff;
+  line-height: 28px;
   letter-spacing: 1px;
   padding: 0 12px;
+  font-weight: bold;
 }
 
 #search-form-mobile {

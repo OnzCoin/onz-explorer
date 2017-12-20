@@ -1,5 +1,5 @@
 import angular from 'angular';
 
-const AppTopAccounts = angular.module('lisk_explorer.topAccounts', []);
+const AppTopAccounts = angular.module('onz_explorer.topAccounts', []);
 
 export default AppTopAccounts;

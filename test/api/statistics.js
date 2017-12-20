@@ -53,7 +53,7 @@ describe('Statistics API', () => {
 
 	/* Define api endpoints to test */
 	describe('GET /api/statistics/getLastBlock', () => {
-		it('should be ok', (done) => {
+		it('should be ok', done => {
 			getLastBlock((err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('block');
@@ -64,7 +64,7 @@ describe('Statistics API', () => {
 	});
 
 	describe('GET /api/statistics/getBlocks', () => {
-		it('should be ok', (done) => {
+		it('should be ok', done => {
 			getBlocks((err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('volume');
@@ -83,7 +83,7 @@ describe('Statistics API', () => {
 
 
 	describe('GET /api/statistics/getPeers', () => {
-		it('should be ok', (done) => {
+		it('should be ok', done => {
 			getPeers((err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('list');

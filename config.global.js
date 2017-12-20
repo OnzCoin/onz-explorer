@@ -1,12 +1,12 @@
 const config = {};
-config.lisk = {};
+config.onz = {};
 config.freegeoip = {};
 config.redis = {};
 config.proposals = {};
 config.log = {};
 config.exchangeRates = {
 	exchanges: {
-		LSK: {},
+		ONZ: {},
 		BTC: {},
 	},
 };

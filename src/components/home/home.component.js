@@ -4,7 +4,7 @@ import template from './home.html';
 const HomeConstructor = function ($scope, $http, $interval) {
 	const vm = this;
 	vm.getLastBlocks = () => {
-		$http.get('/api/getLastBlocks').then((resp) => {
+		$http.get('/api/getLastBlocks').then(resp => {
 			if (resp.data.success) {
 				if (vm.blocks && vm.blocks.length > 0) {
 					if (vm.blocks[0].id !== resp.data.blocks[0].id) {
@@ -24,7 +24,7 @@ const HomeConstructor = function ($scope, $http, $interval) {
 	vm.getLastBlocks();
 
 	vm.getLastTransactions = () => {
-		$http.get('/api/getLastTransactions').then((resp) => {
+		$http.get('/api/getLastTransactions').then(resp => {
 			if (resp.data.success) {
 				if (vm.txs && vm.txs.length > 0) {
 					if (vm.txs[0] !== resp.data.transactions[0]) {

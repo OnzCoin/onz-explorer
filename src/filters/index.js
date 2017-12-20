@@ -5,7 +5,7 @@ import './currency';
 import './epoch-stamp';
 import './fiat';
 import './forging-time';
-import './lisk';
+import './onz';
 import './net-hash';
 import './proposal';
 import './round';

@@ -16,7 +16,7 @@ app.exchange = new utils.exchange(config);
 app.knownAddresses = new utils.knownAddresses();
 app.knownAddresses.load();
 
-app.set('lisk address', `http://${config.lisk.host}:${config.lisk.port}`);
+app.set('onz address', `http://${config.onz.host}:${config.onz.port}`);
 app.set('freegeoip address', `http://${config.freegeoip.host}:${config.freegeoip.port}`);
 
 const tests = new benchmarks(app, api);
@@ -47,7 +47,7 @@ suite.add('transactions.getTransaction', tests.transactions.getTransaction, { de
 	.add('transactions.getTransactionsByAddress', tests.transactions.getTransactionsByAddress, { defer: true })
 	.add('transactions.getTransactionsByBlock', tests.transactions.getTransactionsByBlock, { defer: true });
 
-suite.on('cycle', (event) => {
+suite.on('cycle', event => {
 	logger.info(String(event.target));
 }).on('complete', function () {
 	logger.info(`Slowest is ${this.filter('slowest').pluck('name')}`);

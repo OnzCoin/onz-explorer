@@ -13,7 +13,7 @@ const routes = [].concat(transactions, accounts, blocks, common,
 const apis = {};
 
 module.exports = function (app, api) {
-	routes.forEach((route) => {
+	routes.forEach(route => {
 		if (!apis[route.service]) {
 			apis[route.service] = new api[route.service](app);
 		}

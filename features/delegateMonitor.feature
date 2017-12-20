@@ -30,7 +30,7 @@ Feature: Delegate Monitor
       LAST BLOCK BY
       genesis_\d{1,3}
       \d{18,20}
-      \d+ LSK forged from \d+ transactions
+      \d+ ONZ forged from \d+ transactions
       """
     And I should see "next forgers" element with content that matches:
       """
@@ -40,7 +40,7 @@ Feature: Delegate Monitor
       """
     And I should see "total forged" element with content that matches:
       """
-      TOTAL FORGED \(LSK\)
+      TOTAL FORGED \(ONZ\)
       \d{1,3},\d{3}\.\d{8}
       between 101 active delegates
       """
@@ -48,7 +48,7 @@ Feature: Delegate Monitor
       """
       BEST FORGER
       genesis_\d{1,3}
-      \d{1,3},\d{3}\.\d{8} LSK forged
+      \d{1,3},\d{3}\.\d{8} ONZ forged
       since registration
       """
     And I should see "best productivity" element with content that matches:
@@ -66,11 +66,11 @@ Feature: Delegate Monitor
     And I should see table "active delegates" with 101 rows starting with:
       | Rank | Name              | Address      | Forged              | Forging time | Status | Productivity         | Approval            |
       |------|-------------------|--------------|---------------------|--------------|--------|----------------------|---------------------|
-      | 1    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | 2    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | 3    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | 4    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | 5    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | 1    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | 2    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | 3    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | 4    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | 5    | /genesis_\d{1,3}/ | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
 
   Scenario: should allow to sort active delegates
     Given I'm on page "/delegateMonitor"
@@ -78,11 +78,11 @@ Feature: Delegate Monitor
     Then I should see table "active delegates" with 101 rows starting with:
       | Rank      | Name      | Address      | Forged              | Forging time | Status | Productivity         | Approval            |
       |-----------|-----------|--------------|---------------------|--------------|--------|----------------------|---------------------|
-      | /\d{1,3}/ | genesis_1 | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | /\d{1,3}/ | genesis_2 | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | /\d{1,3}/ | genesis_3 | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | /\d{1,3}/ | genesis_4 | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
-      | /\d{1,3}/ | genesis_5 | /\d{10,20}L/ | /1,\d{3}.\d{8} LSK/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | /\d{1,3}/ | genesis_1 | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | /\d{1,3}/ | genesis_2 | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | /\d{1,3}/ | genesis_3 | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | /\d{1,3}/ | genesis_4 | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
+      | /\d{1,3}/ | genesis_5 | /\d{10,20}L/ | /1,\d{3}.\d{8} ONZ/ | /.+/         |        | /\d{2,3}(\.\d{2})?%/ |/\d{2,3}(\.\d{2})?%/ |
 
   Scenario: should allow show delegate status tooltip
     Given I'm on page "/delegateMonitor"

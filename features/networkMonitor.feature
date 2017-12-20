@@ -11,26 +11,26 @@ Feature: Network Monitor
     And I should see "last block loaded" element with content that matches:
       """
       \d{18,20}
-      0 LSK from 0 transactions
+      0 ONZ from 0 transactions
       (\d+|a few|an|a) \w+ ago
       """
     And I should see "last block" element with content that matches:
       """
       LAST BLOCK
       \d{18,20}
-      0 LSK from 0 transactions
+      0 ONZ from 0 transactions
       (\d+|a few|an|a) \w+ ago
       """
     And I should see "best block" element with content that matches:
       """
       BEST BLOCK
       \d{18,20}
-      \d{1,3}(,\d{1,3})*(\.\d{1,8})? LSK from \d+ transactions
+      \d{1,3}(,\d{1,3})*(\.\d{1,8})? ONZ from \d+ transactions
       (\d+|a few|an|a) \w+ ago
       """
     And I should see "volume" element with content that matches:
       """
-      VOLUME \(LSK\)
+      VOLUME \(ONZ\)
       (\d{1,3},)?\d{1,3}\.\d{1,8}
       transferred within (\d+|a few|an|a) \w+
       from \d+ transactions in \d+ / \d+ blocks

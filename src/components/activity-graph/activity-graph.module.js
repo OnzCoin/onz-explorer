@@ -1,5 +1,5 @@
 import angular from 'angular';
 
-const AppActivityGraph = angular.module('lisk_explorer.activityGraph', []);
+const AppActivityGraph = angular.module('onz_explorer.activityGraph', []);
 
 export default AppActivityGraph;

@@ -8,7 +8,7 @@ const TransactionsConstructor = function ($rootScope, $stateParams, $location, $
 			params: {
 				transactionId: $stateParams.txId,
 			},
-		}).then((resp) => {
+		}).then(resp => {
 			if (resp.data.success) {
 				vm.tx = resp.data.transaction;
 			} else {

@@ -1,6 +1,6 @@
 import AppTools from '../app/app-tools.module';
 
-AppTools.directive('depthChart', ($timeout) => {
+AppTools.directive('depthChart', $timeout => {
 	const { AmCharts } = window;
 
 	function DepthChart(scope, elm) {

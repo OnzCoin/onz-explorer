@@ -38,7 +38,7 @@ const waitForElemAndSendKeys = (selector, keys, callback) => {
 	});
 };
 
-const urlChanged = url => () => browser.getCurrentUrl().then((actualUrl) => {
+const urlChanged = url => () => browser.getCurrentUrl().then(actualUrl => {
 	if (url instanceof RegExp) {
 		return actualUrl.match(url);
 	}
@@ -52,7 +52,7 @@ const elementOccursXTimes = (selector, count) => () =>
  * Vertically scroll top-left corner of the given element (y-direction) into viewport.
  * @param scrollToElement element to be scrolled into visible area
  */
-const scrollTo = (scrollToElement) => {
+const scrollTo = scrollToElement => {
 	const wd = browser.driver;
 	return scrollToElement.getLocation().then(loc => wd.executeScript('window.scrollTo(0,arguments[0]);', loc.y));
 };
@@ -67,7 +67,7 @@ const checkRowsContents = (tableSelector, data, callback) => {
 				const value = data[i][j];
 				const selector = `${tableSelector} tr:nth-child(${i + 1}) td:nth-child(${j + 1}), ${tableSelector} tr:nth-child(${i + 1}) th:nth-child(${j + 1})`;
 				const elem = element(by.css(selector));
-				elem.getText().then((text) => {
+				elem.getText().then(text => {
 					text = text.trim();
 					if (value.startsWith('/') && value.endsWith('/')) {
 						expect(text).to.match(new RegExp(`^${value.slice(1, -1)}$`), `inside element "${selector}"`);

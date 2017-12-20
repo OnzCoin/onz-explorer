@@ -6,7 +6,7 @@ const DelegateMonitorConstructor = function (delegateMonitor, orderBy, $rootScop
 	const vm = this;
 	delegateMonitor(vm);
 
-	vm.getStandby = (n) => {
+	vm.getStandby = n => {
 		let offset = 0;
 
 		if (n) {
@@ -15,9 +15,9 @@ const DelegateMonitorConstructor = function (delegateMonitor, orderBy, $rootScop
 
 		vm.standbyDelegates = null;
 
-		$http.get(`/api/delegates/getStandby?n=${offset}`).then((resp) => {
+		$http.get(`/api/delegates/getStandby?n=${offset}`).then(resp => {
 			if (resp.data.success) {
-				resp.data.delegates.forEach((delegate) => {
+				resp.data.delegates.forEach(delegate => {
 					delegate.proposal = $rootScope.delegateProposals[delegate.username.toLowerCase()];
 				});
 

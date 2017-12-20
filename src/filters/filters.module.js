@@ -1,5 +1,5 @@
 import angular from 'angular';
 
-const AppFilters = angular.module('lisk_explorer.filters', []);
+const AppFilters = angular.module('onz_explorer.filters', []);
 
 export default AppFilters;

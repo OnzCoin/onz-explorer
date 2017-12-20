@@ -1,5 +1,5 @@
 import angular from 'angular';
 
-const AppBlocks = angular.module('lisk_explorer.blocks', []);
+const AppBlocks = angular.module('onz_explorer.blocks', []);
 
 export default AppBlocks;

@@ -9,14 +9,14 @@ Feature: Delegate page
       | Uptime        | /\d{1,3}(\.\d\d)?%/       |
       | Rank / Status | 50 / Active               |
       | Approval      | /\d{1,3}(\.\d\d)?%/       |
-      | Vote weight   | /99(,\d{3})*.\d{1,8} LSK/ |
-      | Forged        | /1,172.\d{8} LSK/         |
+      | Vote weight   | /99(,\d{3})*.\d{1,8} ONZ/ |
+      | Forged        | /1,172.\d{8} ONZ/         |
       | Blocks        | /\d+ \(\d+ missed\)/      |
 
   Scenario: should allow to show voters
     Given I'm on page "/delegate/537318935439898807L"
     When I click "show voters button"
-    Then I should see "gottavoteemall • 16313739661670634666L" in "voters" element
+    Then I should see "gottavoteemall • 15323650579610211509Z" in "voters" element
     
   Scenario: should link voters to address page
     Given I'm on page "/delegate/537318935439898807L"

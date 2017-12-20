@@ -9,15 +9,15 @@ config.host = '0.0.0.0'; // Interface to listen on, 0.0.0.0 to listen on all ava
 config.port = 6040; // Port to listen on
 
 /**
- * LISK node
+ * ONZ node
  */
-config.lisk.host = '127.0.0.1';
-config.lisk.port = 4000;
+config.onz.host = '45.32.62.121';
+config.onz.port = 10998;
 
 /**
  * FreeGeoIP server
  */
-config.freegeoip.host = '127.0.0.1';
+config.freegeoip.host = '45.32.62.121';
 config.freegeoip.port = 8080;
 
 /**
@@ -36,7 +36,7 @@ config.log.enabled = true;
 // Output for logs - can be device file or ordinary path
 config.log.file = './logs/explorer.log';
 // Log level - (trace, debug, info, warn, error)
-config.log.level = 'info';
+config.log.level = 'debug';
 
 /**
  * Header price tickers, Currency switcher
@@ -47,10 +47,10 @@ config.exchangeRates.enabled = true;
 config.exchangeRates.updateInterval = 30000;
 
 // Configuration for different currency pairs, set false to disable pair
-// LSK/BTC pair, supported: poloniex
-config.exchangeRates.exchanges.LSK.BTC = 'poloniex';
-// LSK/CNY pair, supported: jubi, bitbays
-config.exchangeRates.exchanges.LSK.CNY = 'jubi';
+// ONZ/BTC pair, supported: poloniex
+config.exchangeRates.exchanges.ONZ.BTC = 'poloniex';
+// ONZ/CNY pair, supported: jubi, bitbays
+config.exchangeRates.exchanges.ONZ.CNY = 'jubi';
 // BTC/USD pair, supported: bitfinex, bitstamp, btce
 config.exchangeRates.exchanges.BTC.USD = 'bitfinex';
 // BTC/EUR pair, supported: bitstamp, bitmarket

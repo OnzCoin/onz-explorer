@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 		const done = this.async();
 
 		async.series([
-			(callback) => {
+			callback => {
 				// Skip exchange if not enabled
 				if (!config.marketWatcher.exchanges.poloniex) {
 					return callback(null);
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
 					return callback(null, res);
 				});
 			},
-			(callback) => {
+			callback => {
 				// Skip exchange if not enabled
 				if (!config.marketWatcher.exchanges.bittrex) {
 					return callback(null);
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 				});
 			},
 		],
-		(err) => {
+		err => {
 			if (err) {
 				grunt.log.error(err);
 				done(false);
@@ -53,7 +53,7 @@ module.exports = function (grunt) {
 		const done = this.async();
 
 		async.series([
-			(callback) => {
+			callback => {
 				// Skip exchange if not enabled
 				if (!config.marketWatcher.exchanges.poloniex) {
 					return callback(null);
@@ -68,7 +68,7 @@ module.exports = function (grunt) {
 					return callback(null, res);
 				});
 			},
-			(callback) => {
+			callback => {
 				// Skip exchange if not enabled
 				if (!config.marketWatcher.exchanges.bittrex) {
 					return callback(null);
@@ -84,7 +84,7 @@ module.exports = function (grunt) {
 				});
 			},
 		],
-		(err) => {
+		err => {
 			if (err) {
 				grunt.log.error(err);
 				done(false);

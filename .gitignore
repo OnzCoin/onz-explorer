@@ -10,3 +10,6 @@ po/*.pot
 Thumbs.db
 sftp-config.json
 blockchain_explorer.db.gz
+package-lock.json
+logs/explorer.log
+.vscode

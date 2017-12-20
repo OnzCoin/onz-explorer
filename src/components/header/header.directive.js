@@ -10,10 +10,10 @@ import './header.css';
 AppHeader.directive('mainHeader', ($socket, $rootScope, Header) => {
 	const HeaderLink = () => {
 		$rootScope.currency = {
-			symbol: 'LSK',
+			symbol: 'ONZ',
 		};
 
-		$rootScope.showNethash = (hash) => {
+		$rootScope.showNethash = hash => {
 			if (typeof hash === 'string' && hash.length > 0) {
 				return hash.toLowerCase() !== 'mainnet';
 			}
@@ -23,12 +23,12 @@ AppHeader.directive('mainHeader', ($socket, $rootScope, Header) => {
 		const header = new Header($rootScope);
 		const ns = $socket('/header');
 
-		ns.on('data', (res) => {
+		ns.on('data', res => {
 			if (res.status) { header.updateBlockStatus(res.status); }
 			if (res.ticker) { header.updatePriceTicker(res.ticker); }
 		});
 
-		ns.on('delegateProposals', (res) => {
+		ns.on('delegateProposals', res => {
 			if (res) { header.updateDelegateProposals(res); }
 		});
 

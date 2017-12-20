@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('forgingTime', () => (seconds) => {
+AppFilters.filter('forgingTime', () => seconds => {
 	if (seconds === 0) {
 		return 'Now!';
 	}

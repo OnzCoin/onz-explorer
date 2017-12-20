@@ -15,7 +15,7 @@ module.exports = function (config, client) {
 		running = true;
 
 		async.series([
-			(callback) => {
+			callback => {
 				if (!config.marketWatcher.exchanges.poloniex) {
 					callback(null);
 				} else {
@@ -28,7 +28,7 @@ module.exports = function (config, client) {
 					});
 				}
 			},
-			(callback) => {
+			callback => {
 				if (!config.marketWatcher.exchanges.bittrex) {
 					callback(null);
 				} else {
@@ -42,7 +42,7 @@ module.exports = function (config, client) {
 				}
 			},
 		],
-		(err) => {
+		err => {
 			if (err) {
 				logger.error('Candles:', 'Error updating candles:', err);
 			} else {

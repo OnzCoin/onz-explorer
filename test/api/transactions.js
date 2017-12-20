@@ -3,7 +3,7 @@ const node = require('./../node.js');
 const params = {
 	blockId: '6524861224470851795',
 	transactionId: '1465651642158264047',
-	address: '16313739661670634666L',
+	address: '15323650579610211509Z',
 	offset: 20,
 	limit: 100,
 };
@@ -59,7 +59,7 @@ describe('Transactions API', () => {
 
 	/* Define api endpoints to test */
 	describe('GET /api/getTransaction', () => {
-		it('should be ok with Genesis transaction', (done) => {
+		it('should be ok with Genesis transaction', done => {
 			getTransaction(params.transactionId, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transaction');
@@ -85,7 +85,7 @@ describe('Transactions API', () => {
 			});
 		});
 
-		it('should be not ok with no transaction', (done) => {
+		it('should be not ok with no transaction', done => {
 			getTransaction('', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -96,7 +96,7 @@ describe('Transactions API', () => {
 
 	/* We are skipping this temporarily, theres a call back error that needs to be fixed */
 	describe('GET /api/getUnconfirmedTransactions', () => {
-		it.skip('should be ok', (done) => {
+		it.skip('should be ok', done => {
 			getUnconfirmedTransactions((err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				done();
@@ -105,7 +105,7 @@ describe('Transactions API', () => {
 	});
 
 	describe('GET /api/getLastTransactions', () => {
-		it('should be ok', (done) => {
+		it('should be ok', done => {
 			getLastTransactions((err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transactions').that.is.an('array');
@@ -116,7 +116,7 @@ describe('Transactions API', () => {
 	});
 
 	describe('GET /api/getTransactionsByAddress', () => {
-		it('using known address should be ok', (done) => {
+		it('using known address should be ok', done => {
 			getTransactionsByAddress(params.address, '0', params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transactions').that.is.an('array');
@@ -125,7 +125,7 @@ describe('Transactions API', () => {
 			});
 		});
 
-		it('using known address and offset of 20 should be ok', (done) => {
+		it('using known address and offset of 20 should be ok', done => {
 			getTransactionsByAddress(params.address, params.offset, params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transactions').that.is.an('array');
@@ -134,7 +134,7 @@ describe('Transactions API', () => {
 			});
 		});
 
-		it('using invalid address should fail', (done) => {
+		it('using invalid address should fail', done => {
 			getTransactionsByAddress('', '0', params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -144,7 +144,7 @@ describe('Transactions API', () => {
 	});
 
 	describe('GET /api/getTransactionsByBlock', () => {
-		it('using known block should be ok', (done) => {
+		it('using known block should be ok', done => {
 			getTransactionsByBlock(params.blockId, '0', params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transactions').that.is.an('array');
@@ -153,7 +153,7 @@ describe('Transactions API', () => {
 			});
 		}).timeout(5000);
 
-		it('using known block and offset of 20 should be ok', (done) => {
+		it('using known block and offset of 20 should be ok', done => {
 			getTransactionsByBlock(params.blockId, params.offset, params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body).to.have.property('transactions');
@@ -162,7 +162,7 @@ describe('Transactions API', () => {
 			});
 		}).timeout(5000);
 
-		it('using invalid block should fail', (done) => {
+		it('using invalid block should fail', done => {
 			getTransactionsByBlock('', '0', params.limit, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');

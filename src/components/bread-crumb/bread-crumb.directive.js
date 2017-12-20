@@ -13,7 +13,7 @@ AppBreadCrumb.directive('breadCrumb', ($state, $transitions) => {
 			let section = next;
 
 			while (section.parentDir !== section.name) {
-				states.forEach((item) => {
+				states.forEach(item => {
 					if (item.name === section.parentDir) {
 						sections.unshift({
 							name: item.name,
@@ -45,7 +45,7 @@ AppBreadCrumb.directive('breadCrumb', ($state, $transitions) => {
 			let paramValue = '';
 
 			if (params) {
-				params.forEach((item) => {
+				params.forEach(item => {
 					paramName = item.replace(/(^\/:)|(\?)/g, '');
 					paramValue = paramName && breadCrumbValues && breadCrumbValues[paramName] ? breadCrumbValues[paramName] : '';
 					path = path.replace(item, `/${paramValue}`);
@@ -57,7 +57,7 @@ AppBreadCrumb.directive('breadCrumb', ($state, $transitions) => {
 	};
 
 	const BreadCrumbLink = (scope, element, attrs, ctrl) => {
-		const init = (values) => {
+		const init = values => {
 			const states = $state.get();
 			if (!scope.breadCrumb) {
 				scope.breadCrumb = {};

@@ -1,7 +1,7 @@
 import AppDelegateMonitor from './delegate-monitor.module';
 
 const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
-	const bestForger = (delegates) => {
+	const bestForger = delegates => {
 		let delegate;
 		if (delegates.length > 0) {
 			delegate = delegates.reduce((d1, d2) =>
@@ -14,7 +14,7 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		.map(d => parseInt(d.forged, 10))
 		.reduce((memo, num) => parseInt(memo, 10) + parseInt(num, 10), 0);
 
-	const bestProductivity = (delegates) => {
+	const bestProductivity = delegates => {
 		let delegate;
 		if (delegates.length > 0) {
 			delegate = delegates.reduce((d1, d2) => ((d1.productivity > d2.productivity) ? d1 : d2));
@@ -22,7 +22,7 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		return delegate;
 	};
 
-	const worstProductivity = (delegates) => {
+	const worstProductivity = delegates => {
 		let delegate;
 		if (delegates.length > 0) {
 			delegate = delegates.reduce((d1, d2) => ((d1.productivity < d2.productivity) ? d1 : d2));
@@ -30,11 +30,11 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		return delegate;
 	};
 
-	const updateForgingTotals = (delegates) => {
+	const updateForgingTotals = delegates => {
 		$scope.forgingTotals = forgingMonitor.getForgingTotals(delegates);
 	};
 
-	const updateForgingProgress = (totals) => {
+	const updateForgingProgress = totals => {
 		totals.processed = forgingMonitor.getForgingProgress(totals);
 
 		if (totals.processed > 0) {
@@ -42,8 +42,8 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		}
 	};
 
-	this.updateActive = (active) => {
-		active.delegates.forEach((d) => {
+	this.updateActive = active => {
+		active.delegates.forEach(d => {
 			d.forgingStatus = forgingMonitor.getStatus(d);
 			d.proposal = $rootScope.delegateProposals[d.username.toLowerCase()];
 		});
@@ -53,7 +53,7 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		updateForgingProgress($scope.forgingTotals);
 	};
 
-	this.updateTotals = (active) => {
+	this.updateTotals = active => {
 		$scope.totalDelegates = active.totalCount || 0;
 		$scope.totalActive = 101;
 
@@ -69,33 +69,33 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 		$scope.worstProductivity = worstProductivity(active.delegates);
 	};
 
-	this.updateLastBlock = (lastBlock) => {
+	this.updateLastBlock = lastBlock => {
 		$scope.lastBlock = lastBlock.block;
 	};
 
-	this.updateRegistrations = (registrations) => {
+	this.updateRegistrations = registrations => {
 		$scope.registrations = registrations.transactions;
 	};
 
-	this.updateNextForgers = (nextForgers) => {
+	this.updateNextForgers = nextForgers => {
 		$scope.nextForgers = nextForgers;
 	};
 
-	this.updateVotes = (votes) => {
+	this.updateVotes = votes => {
 		$scope.votes = votes.transactions;
 	};
 
-	this.updateApproval = (approval) => {
+	this.updateApproval = approval => {
 		$scope.approval = approval;
 	};
 
-	this.updateLastBlocks = (delegate) => {
-		$scope.activeDelegates.forEach((d) => {
+	this.updateLastBlocks = delegate => {
+		$scope.activeDelegates.forEach(d => {
 			d.forgingStatus = forgingMonitor.getStatus(d);
 		});
 
 		let found = false;
-		const existing = $scope.activeDelegates.filter((d) => {
+		const existing = $scope.activeDelegates.filter(d => {
 			if (!found && (d.publicKey === delegate.publicKey)) {
 				found = true;
 				return true;
@@ -113,11 +113,11 @@ const DelegateMonitor = function ($scope, $rootScope, forgingMonitor) {
 };
 
 AppDelegateMonitor.factory('delegateMonitor',
-	($socket, $rootScope, forgingMonitor) => (vm) => {
+	($socket, $rootScope, forgingMonitor) => vm => {
 		const delegateMonitor = new DelegateMonitor(vm, $rootScope, forgingMonitor);
 		const ns = $socket('/delegateMonitor');
 
-		ns.on('data', (res) => {
+		ns.on('data', res => {
 			if (res.active) {
 				delegateMonitor.updateActive(res.active);
 				delegateMonitor.updateTotals(res.active);
@@ -129,7 +129,7 @@ AppDelegateMonitor.factory('delegateMonitor',
 			if (res.approval) { delegateMonitor.updateApproval(res.approval); }
 		});
 
-		ns.on('delegate', (res) => {
+		ns.on('delegate', res => {
 			if (res.publicKey) {
 				delegateMonitor.updateLastBlocks(res);
 			}

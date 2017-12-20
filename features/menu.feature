@@ -13,9 +13,9 @@ Feature: Top menu
 
   Scenario: should allow to find an account by address
     Given I'm on page "/"
-    When  I fill in "16313739661670634666L" to "search" field
+    When  I fill in "15323650579610211509Z" to "search" field
     And I hit "enter" in "search" field
-    Then I should be on page "/address/16313739661670634666L"
+    Then I should be on page "/address/15323650579610211509Z"
 
   Scenario: should allow to find a delegate by username
     Given I'm on page "/"
@@ -31,7 +31,7 @@ Feature: Top menu
 
   Scenario: should allow to switch currency to BTC
     Given I'm on page "/"
-    When I click "LSK menu"
+    When I click "ONZ menu"
     And I click "BTC"
     And I should see table "latest transactions" with 20 rows starting with:
       | Id                 | Timestamp                 | Sender      | Recipient             | Amount (BTC)           | Fee (BTC)     |
@@ -41,7 +41,7 @@ Feature: Top menu
   @ignore
   Scenario: should allow to switch currency to CNY
     Given I'm on page "/"
-    When I click "LSK menu"
+    When I click "ONZ menu"
     And I click "CNY"
     And I should see table "latest transactions" with 20 rows starting with:
       | Id                 | Timestamp                 | Sender      | Recipient             | Amount (CNY)           | Fee (CNY)     |
@@ -50,7 +50,7 @@ Feature: Top menu
 
   Scenario: should allow to switch currency to USD
     Given I'm on page "/"
-    When I click "LSK menu"
+    When I click "ONZ menu"
     And I click "USD"
     And I should see table "latest transactions" with 20 rows starting with:
       | Id                 | Timestamp                 | Sender      | Recipient             | Amount (USD)           | Fee (USD)     |
@@ -59,7 +59,7 @@ Feature: Top menu
 
   Scenario: should allow to switch currency to EUR
     Given I'm on page "/"
-    When I click "LSK menu"
+    When I click "ONZ menu"
     And I click "EUR"
     And I should see table "latest transactions" with 20 rows starting with:
       | Id                 | Timestamp                 | Sender      | Recipient             | Amount (EUR)           | Fee (EUR)     |
@@ -69,17 +69,17 @@ Feature: Top menu
   @ignore
   Scenario: should allow to switch currency to RUB
     Given I'm on page "/"
-    When I click "LSK menu"
+    When I click "ONZ menu"
     And I click "RUB"
     And I should see table "latest transactions" with 20 rows starting with:
       | Id                 | Timestamp                 | Sender      | Recipient             | Amount (RUB)           | Fee (RUB)     |
       |--------------------|---------------------------|-------------|-----------------------|------------------------|---------------|
       | 292176566870988581 | /2017\/06\/19 \d\d:18:09/ | standby_301 | 18234943547133247982L | /\d+(,\d{3})?(\.\d+)?/ | /\d+(\.\d+)?/ |
-  Scenario: should allow to switch currency to LSK
+  Scenario: should allow to switch currency to ONZ
     Given I'm on page "/"
-    When I click "LSK menu"
-    And I click "LSK"
+    When I click "ONZ menu"
+    And I click "ONZ"
     And I should see table "latest transactions" with 20 rows starting with:
-      | Id                 | Timestamp                 | Sender      | Recipient             | Amount (LSK)           | Fee (LSK)     |
+      | Id                 | Timestamp                 | Sender      | Recipient             | Amount (ONZ)           | Fee (ONZ)     |
       |--------------------|---------------------------|-------------|-----------------------|------------------------|---------------|
       | 292176566870988581 | /2017\/06\/19 \d\d:18:09/ | standby_301 | 18234943547133247982L | /\d+(,\d{3})?(\.\d+)?/ | /\d+(\.\d+)?/ |

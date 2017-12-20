@@ -6,7 +6,7 @@ import '../../../node_modules/amstock3/amcharts/amstock';
 const imagesContext = require.context('!!file-loader?name=amcharts/[name].[ext]!amstock3/amcharts/images');
 imagesContext.keys().forEach(imagesContext);
 
-AppMarketWatcher.directive('stockChart', ($timeout) => {
+AppMarketWatcher.directive('stockChart', $timeout => {
 	const { AmCharts } = window;
 
 	function StockChart(scope, elm) {
@@ -41,8 +41,8 @@ AppMarketWatcher.directive('stockChart', ($timeout) => {
 					fromField: 'btcVolume',
 					toField: 'btcVolume',
 				}, {
-					fromField: 'liskVolume',
-					toField: 'liskVolume',
+					fromField: 'onzVolume',
+					toField: 'onzVolume',
 				}, {
 					fromField: 'numTrades',
 					toField: 'numTrades',

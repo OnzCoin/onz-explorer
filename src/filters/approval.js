@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('approval', () => (votes) => {
+AppFilters.filter('approval', () => votes => {
 	if (isNaN(votes)) {
 		return 0;
 	}

@@ -4,7 +4,7 @@ module.exports = function () {
 	function KnownAddresses() {
 		this.addresses = {};
 
-		this.inTx = (tx) => {
+		this.inTx = tx => {
 			if (tx.senderUsername) {
 				tx.knownSender = { owner: tx.senderUsername };
 			} else {
@@ -21,7 +21,7 @@ module.exports = function () {
 			return tx;
 		};
 
-		this.inAccount = (account) => {
+		this.inAccount = account => {
 			if (account.username) {
 				return { owner: account.username };
 			}
@@ -30,7 +30,7 @@ module.exports = function () {
 
 		this.inAddress = address => this.addresses[address] || null;
 
-		this.inDelegate = (delegate) => {
+		this.inDelegate = delegate => {
 			if (delegate) {
 				return { owner: delegate.username };
 			}

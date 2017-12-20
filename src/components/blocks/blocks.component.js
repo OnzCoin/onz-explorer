@@ -3,14 +3,14 @@ import template from './blocks.html';
 
 const BlocksCtrlConstructor = function ($rootScope, $stateParams, $location, $http, blockTxs) {
 	const vm = this;
-	vm.getLastBlocks = (n) => {
+	vm.getLastBlocks = n => {
 		let offset = 0;
 
 		if (n) {
 			offset = (n - 1) * 20;
 		}
 
-		$http.get(`/api/getLastBlocks?n=${offset}`).then((resp) => {
+		$http.get(`/api/getLastBlocks?n=${offset}`).then(resp => {
 			if (resp.data.success) {
 				vm.blocks = resp.data.blocks;
 
@@ -23,12 +23,12 @@ const BlocksCtrlConstructor = function ($rootScope, $stateParams, $location, $ht
 		});
 	};
 
-	vm.getBlock = (blockId) => {
+	vm.getBlock = blockId => {
 		$http.get('/api/getBlock', {
 			params: {
 				blockId,
 			},
-		}).then((resp) => {
+		}).then(resp => {
 			if (resp.data.success) {
 				vm.block = resp.data.block;
 			} else {

@@ -8,12 +8,12 @@ def fail(reason) {
   if (env.CHANGE_BRANCH != null) {
     pr_branch = " (${env.CHANGE_BRANCH})"
   }
-  slackSend color: 'danger', message: "Build #${env.BUILD_NUMBER} of <${env.BUILD_URL}|${env.JOB_NAME}>${pr_branch} failed (<${env.BUILD_URL}/console|console>, <${env.BUILD_URL}/changes|changes>)\nCause: ${reason}", channel: '#lisk-explorer-jenkins'
+  slackSend color: 'danger', message: "Build #${env.BUILD_NUMBER} of <${env.BUILD_URL}|${env.JOB_NAME}>${pr_branch} failed (<${env.BUILD_URL}/console|console>, <${env.BUILD_URL}/changes|changes>)\nCause: ${reason}", channel: '#onz-explorer-jenkins'
   currentBuild.result = 'FAILURE'
   error("${reason}")
 }
 
-node('lisk-explorer-01'){
+node('onz-explorer-01'){
   try {
     stage ('Prepare Workspace') {
       deleteDir()
@@ -71,24 +71,24 @@ node('lisk-explorer-01'){
       }
     }
 
-    stage ('Start Lisk ') {
+    stage ('Start Onz ') {
       try {
 
         sh '''
         # work around core bug: config.json gets overwritten; use backup
-        cp test/config_lisk.json ~/lisk-test/config_stage.json
-        cd ~/lisk-test
+        cp test/config_onz.json ~/onz-test/config_stage.json
+        cd ~/onz-test
         # disable redis
         jq '.cacheEnabled = false' config_stage.json > config.json
 
-        if [[ ! $(pgrep -f '.*lisk-test/app.js') ]]; then
-          JENKINS_NODE_COOKIE=dontKillMe bash lisk.sh start
+        if [[ ! $(pgrep -f '.*onz-test/app.js') ]]; then
+          JENKINS_NODE_COOKIE=dontKillMe bash onz.sh start
         fi
 
         '''
       } catch (err) {
         echo "Error: ${err}"
-        fail('Stopping build, lisk-core failed')
+        fail('Stopping build, onz-core failed')
       }
     }
 
@@ -168,7 +168,7 @@ node('lisk-explorer-01'){
       if (previous_build != null && previous_build.result == 'FAILURE') {
         slackSend color: 'good',
                   message: "Recovery: build #${env.BUILD_NUMBER} of <${env.BUILD_URL}|${env.JOB_NAME}>${pr_branch} was successful.",
-                  channel: '#lisk-explorer-jenkins'
+                  channel: '#onz-explorer-jenkins'
       }
     }
   }

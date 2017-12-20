@@ -12,7 +12,7 @@ const LessMore = function ($http, $q, params) {
 	this.maximum = params.maximum || 2000;
 	this.limit = params.limit || 50;
 
-	['url', 'parent', 'key', 'offset', 'maximum', 'limit'].forEach((key) => {
+	['url', 'parent', 'key', 'offset', 'maximum', 'limit'].forEach(key => {
 		delete params[key];
 	});
 
@@ -39,7 +39,7 @@ LessMore.prototype.getData = function (offset, limit, cb) {
 	this.loading = true;
 	this.$http.get(this.url, {
 		params,
-	}).then((resp) => {
+	}).then(resp => {
 		if (resp.data.success && angular.isArray(resp.data[this.key])) {
 			cb(resp.data[this.key]);
 		} else {
@@ -83,14 +83,14 @@ LessMore.prototype.acceptData = function (data) {
 
 LessMore.prototype.loadData = function () {
 	this.getData(0, (this.limit + 1),
-		(data) => {
+		data => {
 			this.acceptData(data);
 		});
 };
 
 LessMore.prototype.loadMore = function () {
 	this.getData(this.offset, (this.limit + 1),
-		(data) => {
+		data => {
 			this.acceptData(data);
 		});
 };
@@ -108,7 +108,7 @@ LessMore.prototype.reloadMore = function () {
 		promises.push(self.$http.get(self.url, { params }));
 	}
 
-	self.$q.all(promises).then((responses) => {
+	self.$q.all(promises).then(responses => {
 		angular.forEach(responses, function (resp) {
 			if (resp.data.success && angular.isArray(resp.data[this.key])) {
 				self.acceptData(resp.data[self.key]);

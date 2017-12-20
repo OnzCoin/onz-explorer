@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('round', () => (height) => {
+AppFilters.filter('round', () => height => {
 	if (isNaN(height)) {
 		return 0;
 	}

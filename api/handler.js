@@ -17,10 +17,10 @@ module.exports = (api, endpoint, param, req, res, next) => {
 	return api[endpoint].call(
 		api,
 		param,
-		(data) => {
+		data => {
 			res.json(data);
 		},
-		(data) => {
+		data => {
 			req.json = data;
 			return next();
 		});

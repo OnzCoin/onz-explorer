@@ -4,7 +4,7 @@ const ForgingMonitor = function (forgingStatus) {
 	const countBy = (arr, mapper) => {
 		const result = {};
 
-		arr.forEach((item) => {
+		arr.forEach(item => {
 			const key = mapper(item);
 			if (result[key]) {
 				result[key]++;
@@ -18,8 +18,8 @@ const ForgingMonitor = function (forgingStatus) {
 
 	this.getStatus = delegate => forgingStatus(delegate);
 
-	this.getForgingTotals = (delegates) => {
-		const cnt1 = countBy(delegates, (d) => {
+	this.getForgingTotals = delegates => {
+		const cnt1 = countBy(delegates, d => {
 			let value;
 			switch (d.forgingStatus.code) {
 			case 0:
@@ -39,7 +39,7 @@ const ForgingMonitor = function (forgingStatus) {
 			}
 			return value;
 		});
-		const cnt2 = countBy(delegates, (d) => {
+		const cnt2 = countBy(delegates, d => {
 			switch (d.forgingStatus.code) {
 			case 3:
 			case 4:
@@ -53,7 +53,7 @@ const ForgingMonitor = function (forgingStatus) {
 		return cnt1;
 	};
 
-	this.getForgingProgress = (totals) => {
+	this.getForgingProgress = totals => {
 		let unprocessed = totals.unprocessed || 0;
 		unprocessed += totals.staleStatus || 0;
 

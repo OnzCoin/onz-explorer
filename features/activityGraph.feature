@@ -5,7 +5,7 @@ Feature: Activity Graph
     And I should see "Home Activity Graph" in "breadcrumb" element
     And I should see table "statistics" containing:
       | Txs      | 0             |
-      | Volume   | 0 LSK         |
+      | Volume   | 0 ONZ         |
       | Blocks   | 1             |
       | Timespan | a few seconds |
       | Accounts | 1             |

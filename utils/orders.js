@@ -16,7 +16,7 @@ module.exports = function (config, client) {
 
 
 		async.series([
-			(callback) => {
+			callback => {
 				if (!config.marketWatcher.exchanges.poloniex) {
 					callback(null);
 				} else {
@@ -29,7 +29,7 @@ module.exports = function (config, client) {
 					});
 				}
 			},
-			(callback) => {
+			callback => {
 				if (!config.marketWatcher.exchanges.bittrex) {
 					callback(null);
 				} else {
@@ -43,7 +43,7 @@ module.exports = function (config, client) {
 				}
 			},
 		],
-		(err) => {
+		err => {
 			if (err) {
 				logger.error('Orders:', 'Error updating orders:', err);
 			} else {

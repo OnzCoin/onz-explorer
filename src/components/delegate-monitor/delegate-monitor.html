@@ -37,7 +37,7 @@
 									<span class="text-muted" data-ng-switch-when="false">N/A</span>
 								</p>
 								<p class="text-muted">
-									<span class="lisk">{{vm.lastBlock.totalForged || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}} forged</span>
+									<span class="onz">{{vm.lastBlock.totalForged || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}} forged</span>
 									<span class="num-trans">from {{vm.lastBlock.numberOfTransactions || 0}} transactions</span>
 								</p>
 							</div>
@@ -84,7 +84,7 @@
 							<div class="pull-left total-forged">
 								<p class="small-title">Total Forged <span class="text-muted">({{$root.currency.symbol}})</span></p>
 								<p class="big-details">
-									<span class="lisk">{{vm.totalForged || 0 | currency:$root.currency:$root.decimalPlaces}}</span>
+									<span class="onz">{{vm.totalForged || 0 | currency:$root.currency:$root.decimalPlaces}}</span>
 								</p>
 								<p class="text-muted total-active">between {{vm.totalActive || 0 }} active delegates</p>
 							</div>
@@ -100,7 +100,7 @@
 									<a data-account-href="vm.bestForger" data-type="delegate" data-ng-switch-when="true">{{vm.bestForger.username}}</a>
 									<span class="text-muted" data-ng-switch-when="false">N/A</span>
 								</p>
-								<p class="text-muted lisk">{{vm.bestForger.forged || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}} forged</p>
+								<p class="text-muted onz">{{vm.bestForger.forged || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}} forged</p>
 								<p class="text-muted time-since">since registration</p>
 							</div>
 						</div>
@@ -292,7 +292,7 @@
 								<tr data-ng-repeat="d in vm.activeDelegates | orderBy:$root.natural(vm.tables.active.predicate):vm.tables.active.reverse track by d.rate">
 									<td>{{d.rate}}</td>
 									<td>
-										<a data-ng-if="d.proposal" class="glyphicon glyphicon-user proposal-icon" data-ng-href="https://forum.lisk.io/viewtopic.php?f=48&t={{d.proposal.topic}}"
+										<a data-ng-if="d.proposal" class="glyphicon glyphicon-user proposal-icon" data-ng-href="https://forum.onzcoin.com/viewtopic.php?f=48&t={{d.proposal.topic}}"
 											title="{{d.proposal.description}}" target="_new"></a>&nbsp;
 										<a data-account-href="d" data-type="delegate">{{d.username}}</a>
 									</td>
@@ -331,7 +331,7 @@
 									
 									<td>{{d.rate}}</td>
 									<td>
-										<a data-ng-if="d.proposal" class="glyphicon glyphicon-user proposal-icon" data-ng-href="https://forum.lisk.io/viewtopic.php?f=48&t={{d.proposal.topic}}"
+										<a data-ng-if="d.proposal" class="glyphicon glyphicon-user proposal-icon" data-ng-href="https://forum.onzcoin.com/viewtopic.php?f=48&t={{d.proposal.topic}}"
 											title="{{d.proposal.description}}" target="_new"></a>&nbsp;
 										<a data-account-href="d" data-type="delegate">{{d.username}}</a>
 									</td>

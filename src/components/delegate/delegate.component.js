@@ -10,7 +10,7 @@ const DelegateConstructor = function ($rootScope, $stateParams,
 			params: {
 				address: $stateParams.delegateId,
 			},
-		}).then((resp) => {
+		}).then(resp => {
 			if (resp.data.success) {
 				vm.address = resp.data;
 
@@ -30,7 +30,7 @@ const DelegateConstructor = function ($rootScope, $stateParams,
 	};
 
 	// Sets the filter for which transactions to display
-	vm.filterTxs = (direction) => {
+	vm.filterTxs = direction => {
 		vm.direction = direction;
 		vm.txs = addressTxs({ address: $stateParams.delegateId, direction });
 	};

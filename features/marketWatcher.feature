@@ -28,9 +28,9 @@ Feature: Market Watcher
       BTC VOLUME
       \d+\.\d+
       """
-    And I should see "lisk volume" element with content that matches:
+    And I should see "onz volume" element with content that matches:
       """
-      LSK VOLUME
+      ONZ VOLUME
       \d+\.\d+
       """
     And I should see "num trades" element with content that matches:
@@ -84,7 +84,7 @@ Feature: Market Watcher
     Given I'm on page "/marketWatcher"
     When I click "order book tab"
     Then I should see table "bids" with 100 rows starting with:
-      | Bid (BTC)                | Amount (LSK)             | Total (BTC)              |
+      | Bid (BTC)                | Amount (ONZ)             | Total (BTC)              |
       |--------------------------|--------------------------|--------------------------|
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |
@@ -92,7 +92,7 @@ Feature: Market Watcher
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |
     And I should see table "asks" with 100 rows starting with:
-      | Ask (BTC)                | Amount (LSK)             | Total (BTC)              |
+      | Ask (BTC)                | Amount (ONZ)             | Total (BTC)              |
       |--------------------------|--------------------------|--------------------------|
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |
       | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ | /\d{1,3}(,\d{3})*.\d{8}/ |

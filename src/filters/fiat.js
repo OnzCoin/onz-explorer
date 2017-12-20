@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('fiat', () => (amount) => {
+AppFilters.filter('fiat', () => amount => {
 	if (isNaN(amount)) {
 		return (0).toFixed(2);
 	}

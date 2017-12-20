@@ -28,7 +28,7 @@ AppSearch.directive('search', ($stateParams, $location, $timeout, Global, $http)
 				params: {
 					id: this.q,
 				},
-			}).then((resp) => {
+			}).then(resp => {
 				if (resp.data.success === false) {
 					sch.loading = false;
 					_badQuery();

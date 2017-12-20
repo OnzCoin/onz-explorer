@@ -14,8 +14,8 @@ const routes = [].concat(transactions, accounts, blocks, common,
 const modules = {};
 const services = {};
 
-module.exports = (app) => {
-	routes.forEach((route) => {
+module.exports = app => {
+	routes.forEach(route => {
 		const name = route.service === '' ? 'common' : route.service;
 		if (!modules[name]) {
 			// eslint-disable-next-line import/no-dynamic-require

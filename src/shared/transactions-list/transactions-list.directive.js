@@ -8,7 +8,7 @@ const transactionsList = AppTools.directive('transactionsList', orderBy => ({
 		txs: '=',
 		address: '=',
 	},
-	link: ($scope) => {
+	link: $scope => {
 		$scope.filter = orderBy('date');
 	},
 }));

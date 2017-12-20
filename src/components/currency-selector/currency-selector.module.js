@@ -1,5 +1,5 @@
 import angular from 'angular';
 
-const AppCurrency = angular.module('lisk_explorer.currency', []);
+const AppCurrency = angular.module('onz_explorer.currency', []);
 
 export default AppCurrency;

@@ -10,7 +10,7 @@ module.exports = function (config) {
 		{ db: config.redis.db });
 
 	if (config.redis.password) {
-		client.auth(config.redis.password, (err) => {
+		client.auth(config.redis.password, err => {
 			if (err) {
 				logger.error(`Can't connect to redis: ${err}`);
 			}

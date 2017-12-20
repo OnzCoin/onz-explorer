@@ -17,7 +17,7 @@ App.run((
 		$rootScope.isCollapsed = true;
 
 		// Market Watcher
-		$http.get('/api/exchanges').then((result) => {
+		$http.get('/api/exchanges').then(result => {
 			if (result.data.success && result.data.enabled) {
 				$rootScope.marketWatcher = true;
 			}

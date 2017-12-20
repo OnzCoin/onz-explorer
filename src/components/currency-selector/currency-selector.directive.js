@@ -4,15 +4,15 @@ import template from './currency-selector.html';
 AppCurrency.directive('currencySelector', ($rootScope, $timeout) => {
 	const CurrencySelectorLink = () => {
 		$timeout(() => {
-			$rootScope.currency.symbol = (localStorage && localStorage.getItem('lisk_explorer-currency')) || 'LSK';
+			$rootScope.currency.symbol = (localStorage && localStorage.getItem('onz_explorer-currency')) || 'ONZ';
 		});
 	};
 
 	const CurrencySelectorCtrl = function () {
-		this.setCurrency = (currency) => {
+		this.setCurrency = currency => {
 			$rootScope.currency.symbol = currency;
 			if (localStorage) {
-				localStorage.setItem('lisk_explorer-currency', currency);
+				localStorage.setItem('onz_explorer-currency', currency);
 			}
 		};
 	};

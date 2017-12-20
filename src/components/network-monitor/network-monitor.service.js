@@ -25,7 +25,7 @@ const NetworkMap = function () {
 	const validLocation = location => location && typeof location.latitude === 'number' &&
 	typeof location.longitude === 'number';
 
-	const popupContent = (p) => {
+	const popupContent = p => {
 		let content = '<p class="ip">'.concat(p.ip, '</p>');
 
 		if (p.location.hostname) {
@@ -67,7 +67,7 @@ const NetworkMap = function () {
 
 	this.addConnected = function (peers) {
 		const connected = [];
-		peers.connected.forEach((item) => {
+		peers.connected.forEach(item => {
 			if (validLocation(item.location)) {
 				if (!Object.keys(this.markers).includes(item.ip)) {
 					this.cluster.addLayer(
@@ -86,7 +86,7 @@ const NetworkMap = function () {
 	};
 
 	this.removeDisconnected = function (connected) {
-		Object.keys(this.markers).forEach((ip) => {
+		Object.keys(this.markers).forEach(ip => {
 			if (!connected.includes(ip)) {
 				const m = this.markers[ip];
 
@@ -240,12 +240,12 @@ const NetworkMonitor = function (vm) {
 		};
 	}
 
-	this.counter = (peers) => {
+	this.counter = peers => {
 		const platforms = new Platforms();
 		const versions = new Versions(peers.connected);
 		const heights = new Heights(peers.connected);
 
-		peers.connected.forEach((item) => {
+		peers.connected.forEach(item => {
 			platforms.detect(item.osBrand);
 			versions.detect(item.version);
 			heights.detect(item.height);
@@ -268,40 +268,40 @@ const NetworkMonitor = function (vm) {
 		this.map.addConnected(peers.list);
 	};
 
-	this.updateLastBlock = (lastBlock) => {
+	this.updateLastBlock = lastBlock => {
 		vm.lastBlock = lastBlock.block;
 	};
 
-	this.updateBlocks = (blocks) => {
+	this.updateBlocks = blocks => {
 		vm.bestBlock = blocks.best;
 		vm.volume = blocks.volume;
 	};
 };
 
 AppNetworkMonitor.factory('networkMonitor',
-	($socket, $rootScope) => (vm) => {
+	($socket, $rootScope) => vm => {
 		const networkMonitor = new NetworkMonitor(vm);
 		const ns = $socket('/networkMonitor');
 
-		ns.on('data', (res) => {
+		ns.on('data', res => {
 			if (res.peers) { networkMonitor.updatePeers(res.peers); }
 			if (res.lastBlock) { networkMonitor.updateLastBlock(res.lastBlock); }
 			if (res.blocks) { networkMonitor.updateBlocks(res.blocks); }
 		});
 
-		ns.on('data1', (res) => {
+		ns.on('data1', res => {
 			if (res.lastBlock) {
 				networkMonitor.updateLastBlock(res.lastBlock);
 			}
 		});
 
-		ns.on('data2', (res) => {
+		ns.on('data2', res => {
 			if (res.blocks) {
 				networkMonitor.updateBlocks(res.blocks);
 			}
 		});
 
-		ns.on('data3', (res) => {
+		ns.on('data3', res => {
 			if (res.peers) {
 				networkMonitor.updatePeers(res.peers);
 			}

@@ -21,7 +21,7 @@ module.exports = (api, endpoint, param, deferred, type, getExtraData) =>
 			deferred.resolve();
 			logger.error(`${type}.${endpoint} ~>`, `Error retrieving ${type}: ${error}`);
 		},
-		(data) => {
+		data => {
 			deferred.resolve();
 			const extraData = getExtraData ? getExtraData(data) : '';
 			logger.info(`${type}.${endpoint} ~>`, `${extraData} ${type} retrieved in ${String(deferred.elapsed)} seconds`);

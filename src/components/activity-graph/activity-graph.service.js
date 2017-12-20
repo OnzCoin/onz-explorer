@@ -116,14 +116,14 @@ const ActivityGraph = function () {
 
 		const txsVolume = arr => arr.reduce((vol, tx) => vol += tx.amount, 0);
 
-		const minTime = arr => Math.min(...arr.map((block) => {
+		const minTime = arr => Math.min(...arr.map(block => {
 			if (block.timestamp > 0) {
 				return block.timestamp;
 			}
 			return undefined;
 		}));
 
-		const maxTime = arr => Math.max(...arr.map((block) => {
+		const maxTime = arr => Math.max(...arr.map(block => {
 			if (block.timestamp > 0) {
 				return block.timestamp;
 			}
@@ -171,7 +171,7 @@ ActivityGraph.prototype.clear = function () {
 };
 
 ActivityGraph.prototype.sizeNodes = function () {
-	this.sigma.graph.nodes().forEach((node) => {
+	this.sigma.graph.nodes().forEach(node => {
 		const deg = this.sigma.graph.degree(node.id);
 		node.size = this.settings.maxNodeSize * Math.sqrt(deg);
 	}, this);
@@ -238,7 +238,7 @@ ActivityGraph.prototype.addAccount = function (id) {
 	});
 };
 
-ActivityGraph.prototype.amount = (tx, sign) => `${sign + (tx.amount / Math.pow(10, 8))} LSK`;
+ActivityGraph.prototype.amount = (tx, sign) => `${sign + (tx.amount / Math.pow(10, 8))} ONZ`;
 
 ActivityGraph.prototype.addTxSender = function (tx) {
 	this.addAccount(tx.senderId);
@@ -296,7 +296,7 @@ ActivityGraph.prototype.addBlockGenerator = function (block) {
 
 ActivityGraph.prototype.addBlockTxs = function (block) {
 	if (block.transactions && block.transactions.length) {
-		block.transactions.forEach((tx) => {
+		block.transactions.forEach(tx => {
 			this.addTx(tx);
 			this.addEdge({
 				id: block.id + tx.id,
@@ -310,7 +310,7 @@ ActivityGraph.prototype.addBlockTxs = function (block) {
 };
 
 AppActivityGraph.factory('activityGraph',
-	($socket, $rootScope) => (vm) => {
+	($socket, $rootScope) => vm => {
 		const ns = $socket('/activityGraph');
 		const activityGraph = new ActivityGraph();
 
@@ -319,15 +319,15 @@ AppActivityGraph.factory('activityGraph',
 		vm.cameraMenu = activityGraph.cameraMenu;
 		vm.statistics = activityGraph.statistics;
 
-		activityGraph.sigma.bind('clickNode', (event) => {
+		activityGraph.sigma.bind('clickNode', event => {
 			activityGraph.nodeSelect.add(event);
 		});
 
-		activityGraph.sigma.bind('clickStage doubleClickStage', (event) => {
+		activityGraph.sigma.bind('clickStage doubleClickStage', event => {
 			activityGraph.nodeSelect.remove(event);
 		});
 
-		ns.on('data', (res) => { activityGraph.refresh(res.block); });
+		ns.on('data', res => { activityGraph.refresh(res.block); });
 
 		$rootScope.$on('$destroy', () => {
 			ns.removeAllListeners();

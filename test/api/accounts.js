@@ -1,10 +1,10 @@
 const node = require('./../node.js');
 
 const params = {
-	address: '16313739661670634666L',
-	address_delegate: '8273455169423958419L',
+	address: '15323650579610211509Z',
+	address_delegate: '15323650579610211509Z',
 	excessive_offset: '1000000',
-	publicKey: 'c094ebee7ec0c50ebee32918655e089f6e1a604b83bcaa760293c61e0f18ab6f',
+	publicKey: '55f7d4a2b4d76cd7beb3c65cdacc460d529d4f461c318b1e7daa4318c983894b',
 };
 
 describe('Accounts API', () => {
@@ -41,7 +41,7 @@ describe('Accounts API', () => {
 			'outgoing_cnt');
 	}
 
-	const checkTopAccount = (id) => {
+	const checkTopAccount = id => {
 		node.expect(id).to.have.all.keys(
 			'address',
 			'balance',
@@ -49,7 +49,7 @@ describe('Accounts API', () => {
 			'knowledge');
 	};
 
-	const checkTopAccounts = (id) => {
+	const checkTopAccounts = id => {
 		for (let i = 0; i < id.length; i++) {
 			if (id[i + 1]) {
 				checkTopAccount(id[i]);
@@ -59,7 +59,7 @@ describe('Accounts API', () => {
 
 	/* Define api endpoints to test */
 	describe('GET /api/getAccount', () => {
-		it('using known address should be ok', (done) => {
+		it('using known address should be ok', done => {
 			getAccount(params.address, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.not.be.equal(undefined);
 				checkAccount(res.body);
@@ -67,7 +67,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using invalid address should fail', (done) => {
+		it('using invalid address should fail', done => {
 			getAccount('L', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -75,7 +75,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using unknown address should fail', (done) => {
+		it('using unknown address should fail', done => {
 			getAccount('999999999L', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -83,7 +83,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using no address should fail', (done) => {
+		it('using no address should fail', done => {
 			getAccount('', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -91,7 +91,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using known pk should be ok', (done) => {
+		it('using known pk should be ok', done => {
 			getAccountByPublicKey(params.publicKey, (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				checkAccount(res.body);
@@ -99,7 +99,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using invalid pk should fail', (done) => {
+		it('using invalid pk should fail', done => {
 			getAccountByPublicKey('invalid_pk', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.not.equal(true);
 				node.expect(res.body).to.have.property('error');
@@ -107,7 +107,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using unknown pk should fail', (done) => {
+		it('using unknown pk should fail', done => {
 			getAccountByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -115,7 +115,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using no pk should fail', (done) => {
+		it('using no pk should fail', done => {
 			getAccountByPublicKey('', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(false);
 				node.expect(res.body).to.have.property('error');
@@ -124,9 +124,9 @@ describe('Accounts API', () => {
 		});
 	});
 
-	/* -- if all fail, check lisk for topAccounts = true */
+	/* -- if all fail, check onz for topAccounts = true */
 	describe('GET /api/getTopAccounts', () => {
-		it('using offset 0 and limit 100 should return 100', (done) => {
+		it('using offset 0 and limit 100 should return 100', done => {
 			getTopAccounts('0', '100', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(100);
@@ -135,7 +135,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using offset 0 and limit 1 should return 1', (done) => {
+		it('using offset 0 and limit 1 should return 1', done => {
 			getTopAccounts('0', '1', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(1);
@@ -144,7 +144,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using offset 100 and limit 50 should return 50', (done) => {
+		it('using offset 100 and limit 50 should return 50', done => {
 			getTopAccounts('100', '50', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(50);
@@ -153,7 +153,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using offset 0 and limit 0 should return 100', (done) => {
+		it('using offset 0 and limit 0 should return 100', done => {
 			getTopAccounts('0', '0', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(100);
@@ -162,7 +162,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using offset 0 and limit -1 and return 100', (done) => {
+		it('using offset 0 and limit -1 and return 100', done => {
 			getTopAccounts('0', '-1', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(100);
@@ -171,7 +171,7 @@ describe('Accounts API', () => {
 			});
 		});
 
-		it('using offset 100000 and no limit should return 0', (done) => {
+		it('using offset 100000 and no limit should return 0', done => {
 			getTopAccounts(params.excessive_offset, '', (err, res) => {
 				node.expect(res.body).to.have.property('success').to.be.equal(true);
 				node.expect(res.body.accounts.length).to.equal(0);

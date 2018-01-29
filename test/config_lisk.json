@@ -13,7 +13,7 @@
         "host": "localhost",
         "port": 5432,
         "database": "onz_test",
-        "user": "",
+        "user": "onzcoin",
         "password": "password",
         "poolSize": 95,
         "poolIdleTimeout": 30000,
@@ -48,23 +48,11 @@
         "enabled": true,
         "list": [
             {
-                "ip": "94.237.29.221",
+                "ip": "tnode1.onzcoin.com",
                 "port": 7000
             },
             {
-                "ip": "83.136.254.104",
-                "port": 7000
-            },
-            {
-                "ip": "209.50.48.177",
-                "port": 7000
-            },
-            {
-                "ip": "94.237.64.33",
-                "port": 7000
-            },
-            {
-                "ip": "94.237.30.23",
+                "ip": "tnode2.onzcoin.com",
                 "port": 7000
             }
         ],
@@ -118,5 +106,5 @@
         "masterpassword": "",
         "autoexec": []
     },
-    "nethash": "843351db5e4434c7660035204456c2cb30d362f0fb4aaa30e0c20d6f4d197fda"
+    "nethash": "a0c38f0dd302a6cf5ceef3d9dc5ccf0a12a34ab39c0cc42cf2d2602d8b44b0ad"
 }

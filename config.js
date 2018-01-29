@@ -11,13 +11,13 @@ config.port = 6040; // Port to listen on
 /**
  * ONZ node
  */
-config.onz.host = '45.32.62.121';
+config.onz.host = '127.0.0.1';
 config.onz.port = 10998;
 
 /**
  * FreeGeoIP server
  */
-config.freegeoip.host = '45.32.62.121';
+config.freegeoip.host = '127.0.0.1';
 config.freegeoip.port = 8080;
 
 /**

@@ -11,7 +11,7 @@ config.port = 6040; // Port to listen on
 /**
  * ONZ node
  */
-config.onz.host = '127.0.0.1';
+config.onz.host = 'texplorer.onzcoin.com';
 config.onz.port = 10998;
 
 /**

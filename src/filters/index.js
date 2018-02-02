@@ -19,3 +19,5 @@ import './tx-recipient';
 import './tx-sender';
 import './tx-type';
 import './votes';
+import './tx-id';
+import './block-id';

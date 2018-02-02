@@ -26,7 +26,7 @@
 							<td colspan="6">Waiting for transactions...</td>
 						</tr>
 						<tr data-ng-repeat='tx in vm.txs track by $index'>
-							<td><a class="ellipsis" href="/tx/{{tx.id}}">{{tx.id}}</a></td>
+							<td><a class="ellipsis" href="/tx/{{tx.id}}" title="{{tx.id}}">{{tx.id | txId }}</a></td>
 							<td class="text-right hidden-xs"><span class="ellipsis">{{tx.timestamp | timestamp}}<span></td>
 							<td class="text-right hidden-xs"><a class="ellipsis" data-account-href="tx" data-type="sender">{{tx | txSender}}</a></td>
 							<td class="text-right hidden-xs">
@@ -60,7 +60,7 @@
 							<td colspan="7">Waiting for blocks...</td>
 						</tr>
 						<tr data-ng-repeat='b in vm.blocks track by $index'>
-							<td><a class="ellipsis" href="/block/{{b.id}}">{{b.id}}</a></td>
+							<td><a class="ellipsis" href="/block/{{b.id}}" title="{{b.id}}">{{b.id | bId }}</a></td>
 							<td class="text-right"><span class="ellipsis">{{b.height}}</span></td>
 							<td class="text-right hidden-xs"><span class="ellipsis">{{b.timestamp | timestamp}}</span></td>
 							<td class="text-right hidden-xs">{{b.transactionsCount}}</td>

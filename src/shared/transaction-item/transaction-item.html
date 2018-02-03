@@ -1,5 +1,5 @@
 <td data-title="Transaction ID" class="text-nowrap">
-	<a class="txid" href="/tx/{{tx.id}}">{{tx.id}}</a>
+	<a class="txid" href="/tx/{{tx.id}}">{{tx.id | txId:4 }}</a>
 	<span class="btn-copy" clip-copy="tx.id"></span>
 </td>
 <td data-title="Date">{{tx.timestamp | timestamp }}</td>

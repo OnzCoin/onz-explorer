@@ -38,7 +38,7 @@
 								</div>
 								<div data-ng-if="vm.lastBlock" class="last-block-loaded">
 									<p class="big-details">
-										<a data-ng-href="/block/{{vm.lastBlock.id}}">{{vm.lastBlock.id}}</a>
+										<a data-ng-href="/block/{{vm.lastBlock.id}}">{{vm.lastBlock.id | bId:8 }}</a>
 									</p>
 									<p class="text-muted">
 										<span class="onz">{{vm.lastBlock.totalAmount + vm.lastBlock.totalFee || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}}</span>
@@ -64,7 +64,7 @@
 								</div>
 								<div data-ng-if="vm.bestBlock">
 									<p class="big-details">
-										<a data-ng-href="/block/{{vm.bestBlock.id}}">{{vm.bestBlock.id}}</a>
+										<a data-ng-href="/block/{{vm.bestBlock.id}}">{{vm.bestBlock.id | bId:8 }}</a>
 									</p>
 									<p class="text-muted">
 										<span class="onz">{{vm.bestBlock.totalAmount + vm.bestBlock.totalFee || 0 | currency:$root.currency:$root.decimalPlaces}} {{$root.currency.symbol}}</span>

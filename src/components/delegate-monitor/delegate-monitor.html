@@ -33,7 +33,7 @@
 									<span class="text-muted" data-ng-switch-when="false">N/A</span>
 								</p>
 								<p class="text-muted" data-ng-switch="!!vm.lastBlock">
-									<a data-ng-href="/block/{{vm.lastBlock.id}}" data-ng-switch-when="true">{{vm.lastBlock.id}}</a>
+									<a data-ng-href="/block/{{vm.lastBlock.id}}" data-ng-switch-when="true">{{vm.lastBlock.id | bId:10 }}</a>
 									<span class="text-muted" data-ng-switch-when="false">N/A</span>
 								</p>
 								<p class="text-muted">
@@ -169,7 +169,7 @@
 													<a data-account-href="v.delegate" data-type="delegate" data-ng-if="v.delegate.username">{{v.delegate.username}}</a>
 												</td>
 												<td class="tx hidden-xs">
-													<a class="ellipsis" data-ng-href="/tx/{{v.id}}">{{v.id}}</a>
+													<a class="ellipsis" data-ng-href="/tx/{{v.id}}">{{v.id | txId:4 }}</a>
 												</td>
 												<td class="time-ago">
 													<span class="text-muted">{{v.timestamp | timeAgo}}</span>
@@ -208,7 +208,7 @@
 													<a data-account-href="r.delegate" data-type="delegate">{{r.delegate.username}}</a>
 												</td>
 												<td class="tx hidden-xs">
-													<a class="ellipsis" data-ng-href="/tx/{{r.id}}">{{r.id}}</a>
+													<a class="ellipsis" data-ng-href="/tx/{{r.id}}">{{r.id | txId:4 }}</a>
 												</td>
 												<td class="time-ago">
 													<span class="text-muted">{{r.timestamp | timeAgo}}</span>

@@ -10,10 +10,10 @@
 }
 
 .navbar-brand .logo {
-  height: 35px;
-  width: 76px;
-  background: url('../../assets/img/onz-logo.svg');
-  background-size: auto 35px;
+  height: 33px;
+  width: 100px;
+  background: url('../../assets/img/onz-logo.png');
+  background-size: auto 33px;
 }
 
 .navbar-default .nethash

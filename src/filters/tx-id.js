@@ -1,12 +1,12 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('txId', () => transactionId => {
-	if (!transactionId) {
+AppFilters.filter('txId', (numberFilter) => (transactionId, displayLength) => {
+	if (!transactionId || displayLength <= 0) {
 		return '';
 	}
 
-	const start = transactionId.substr(0, 6);
-	const end = transactionId.substr(-7);
+	const start = transactionId.substr(0, displayLength);
+	const end = transactionId.substr(-(displayLength));
 
 	return start.concat('...').concat(end);
 });

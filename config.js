@@ -7,11 +7,16 @@ const config = require('./config.global');
  */
 config.host = '0.0.0.0'; // Interface to listen on, 0.0.0.0 to listen on all available
 config.port = 6040; // Port to listen on
+config.sslenabled = false;
+config.sslhost = '0.0.0.0';
+config.sslport = 443;
+config.sslkey = '/path/onzcoin.com.key';
+config.sslcert = '/path/onzcoin.com.crt';
 
 /**
  * ONZ node
  */
-config.onz.host = 'texplorer.onzcoin.com';
+config.onz.host = '127.0.0.1';
 config.onz.port = 10998;
 
 /**

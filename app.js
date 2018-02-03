@@ -8,6 +8,7 @@ const async = require('async');
 const packageJson = require('./package.json');
 const split = require('split');
 const logger = require('./utils/logger');
+const fs = require('fs');
 
 const app = express();
 const utils = require('./utils');
@@ -182,13 +183,34 @@ async.parallel([
 	},
 ], () => {
 	const server = app.listen(app.get('port'), app.get('host'), err => {
-		if (err) {
-			logger.info(err);
-		} else {
-			logger.info(`Onz Explorer started at ${app.get('host')}:${app.get('port')}`);
+		if (!err) {
+			if (config.sslenabled) {
+				const privateKey = fs.readFileSync(config.sslkey);
+				const certificate = fs.readFileSync(config.sslcert);
+				const https = require('https').createServer({
+					key: privateKey,
+					cert: certificate,
+					ciphers: 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:' + 'ECDHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384:DHE-RSA-AES256-SHA384:ECDHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA256:HIGH:' + '!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!SRP:!CAMELLIA'
+				}, app);
 
-			const io = require('socket.io').listen(server);
-			require('./sockets')(app, io);
+				https.listen(config.sslport, config.sslhost, error => {
+					if (!err) {
+						logger.info(`Onz Explorer (SSL) started at ${config.sslport}:${config.sslhost}`);
+					} else {
+						logger.info(error);
+					}
+				});
+
+				const io = require('socket.io')(https);
+				require('./sockets')(app, io);
+			} else {
+				logger.info(`Onz Explorer started at ${app.get('host')}:${app.get('port')}`);
+
+				const io = require('socket.io').listen(server);
+				require('./sockets')(app, io);
+			}
+		} else {
+			logger.info(err);
 		}
 	});
 });

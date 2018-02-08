@@ -41,7 +41,7 @@ config.log.enabled = true;
 // Output for logs - can be device file or ordinary path
 config.log.file = './logs/explorer.log';
 // Log level - (trace, debug, info, warn, error)
-config.log.level = 'debug';
+config.log.level = 'info';
 
 /**
  * Header price tickers, Currency switcher

@@ -7,8 +7,8 @@
     "url": "git@github.com/OnzCoin/onz-explorer.git"
   },
   "private": true,
-  "author": "Mars Yau <mars@onzcoin.com>, Kan Wong <kan@onzcoin.com>",
-  "license": "GPL-3.0",
+  "author": "Onz Foundation <admin@onzcoin.com>, lightcurve GmbH <admin@lightcurve.io>",
+  "license": "GPL-3",
   "main": "src/main.js",
   "scripts": {
     "test": "./node_modules/.bin/grunt test --verbose",
@@ -89,7 +89,7 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-airbnb-base": "^11.3.1",
     "eslint-config-google": "^0.9.1",
-    "eslint-config-onz-base": "git+https://github.com/OnzCoin/eslint-config-onz-base.git",
+    "eslint-config-onz-base": "https://github.com/OnzCoin/eslint-config-onz-base/archive/v1.0.0.tar.gz",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-html": "^3.2.0",
     "eslint-plugin-import": "^2.7.0",

@@ -6,7 +6,7 @@ import AppFilters from './filters.module';
 AppFilters.filter('nethash', () => nethash => {
 	if (nethash === 'aa14b4d84260e00b6fc033c022a25965629ab0e8a4aafc77e64cad4cf0dc2e00') {
 		return 'Testnet';
-	} else if (nethash === '463aeac28885fa5be9efc4d095900f622e3d9efac8c9317b7f1e8fe804d5a039') {
+	} else if (nethash === 'ef56692f7973f7a8e82d6bd5bc68d5f514e4c3ed97d4cfca0345fddd0f421999') {
 		return 'Mainnet';
 	}
 	return 'Local';

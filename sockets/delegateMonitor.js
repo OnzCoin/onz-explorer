@@ -59,7 +59,7 @@ module.exports = function (app, connectionHandler, socket) {
 	const updateDelegate = (delegate, updateForgingTime) => {
 		// Update delegate with forging time
 		if (updateForgingTime) {
-			delegate.forgingTime = tmpData.nextForgers.delegates.indexOf(delegate.publicKey) * 10;
+			delegate.forgingTime = tmpData.nextForgers.delegates.indexOf(delegate.publicKey) * 15;
 		}
 
 		// Update delegate with info if should forge in current round

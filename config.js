@@ -16,7 +16,7 @@ config.sslcert = '/path/onzcoin.com.crt';
 /**
  * ONZ node
  */
-config.onz.host = '45.76.150.74';
+config.onz.host = '127.0.0.1';
 config.onz.port = 10998;
 
 /**

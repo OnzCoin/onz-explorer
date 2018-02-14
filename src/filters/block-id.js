@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('bId', (numberFilter) => (blockId, displayLength) => {
+AppFilters.filter('bId', () => (blockId, displayLength) => {
 	if (!blockId) {
 		return '';
 	}

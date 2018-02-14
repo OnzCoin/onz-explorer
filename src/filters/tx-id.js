@@ -1,6 +1,6 @@
 import AppFilters from './filters.module';
 
-AppFilters.filter('txId', (numberFilter) => (transactionId, displayLength) => {
+AppFilters.filter('txId', () => (transactionId, displayLength) => {
 	if (!transactionId || displayLength <= 0) {
 		return '';
 	}

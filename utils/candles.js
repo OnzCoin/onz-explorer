@@ -6,6 +6,7 @@ module.exports = function (config, client) {
 	let running = false;
 	const poloniex = new candles.poloniex(client);
 	const bittrex = new candles.bittrex(client);
+	const graviex = new candles.graviex(client);
 
 	this.updateCandles = function () {
 		if (running) {
@@ -33,6 +34,19 @@ module.exports = function (config, client) {
 					callback(null);
 				} else {
 					bittrex.updateCandles((err, res) => {
+						if (err) {
+							callback(err);
+						} else {
+							callback(null, res);
+						}
+					});
+				}
+			},
+			callback => {
+				if (!config.marketWatcher.exchanges.graviex) {
+					callback(null);
+				} else {
+					graviex.updateCandles((err, res) => {
 						if (err) {
 							callback(err);
 						} else {

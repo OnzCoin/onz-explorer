@@ -38,6 +38,21 @@ module.exports = function (grunt) {
 					return callback(null, res);
 				});
 			},
+			callback => {
+				// Skip exchange if not enabled
+				if (!config.marketWatcher.exchanges.graviex) {
+					return callback(null);
+				}
+
+				const graviex = new candles.graviex(client);
+
+				return graviex.buildCandles((err, res) => {
+					if (err) {
+						return callback(err);
+					}
+					return callback(null, res);
+				});
+			},
 		],
 		err => {
 			if (err) {

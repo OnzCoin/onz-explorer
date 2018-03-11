@@ -5,6 +5,7 @@ const logger = require('./logger');
 module.exports = function (config, client) {
 	const poloniex = new orders.poloniex(client);
 	const bittrex = new orders.bittrex(client);
+	const graviex = new orders.graviex(client);
 	let running = false;
 
 	this.updateOrders = () => {
@@ -34,6 +35,19 @@ module.exports = function (config, client) {
 					callback(null);
 				} else {
 					bittrex.updateOrders((err, res) => {
+						if (err) {
+							callback(err);
+						} else {
+							callback(null, res);
+						}
+					});
+				}
+			},
+			callback => {
+				if (!config.marketWatcher.exchanges.graviex) {
+					callback(null);
+				} else {
+					graviex.updateOrders((err, res) => {
 						if (err) {
 							callback(err);
 						} else {

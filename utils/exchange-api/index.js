@@ -70,6 +70,16 @@ module.exports = function (config) {
 					return cb(null, res.BTC_LSK.last);
 				},
 			],
+			graviex: [
+				'Graviex',
+				'https://graviex.net/api/v2/tickers/onzbtc.json',
+				(res, cb) => {
+					if (res.error) {
+						return cb(res.error);
+					}
+					return cb(null, res.BTC_ONZ.last);
+				},
+			],
 		},
 		ONZCNY: {
 			jubi: [

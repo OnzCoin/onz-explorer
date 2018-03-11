@@ -52,16 +52,16 @@ config.exchangeRates.enabled = false;
 config.exchangeRates.updateInterval = 30000;
 
 // Configuration for different currency pairs, set false to disable pair
-// ONZ/BTC pair, supported: poloniex
-config.exchangeRates.exchanges.ONZ.BTC = 'poloniex';
+// ONZ/BTC pair, supported: poloniex, graviex
+config.exchangeRates.exchanges.ONZ.BTC = 'graviex';
 // ONZ/CNY pair, supported: jubi, bitbays
-config.exchangeRates.exchanges.ONZ.CNY = 'jubi';
+config.exchangeRates.exchanges.ONZ.CNY = false;
 // BTC/USD pair, supported: bitfinex, bitstamp, btce
-config.exchangeRates.exchanges.BTC.USD = 'bitfinex';
+config.exchangeRates.exchanges.BTC.USD = false;
 // BTC/EUR pair, supported: bitstamp, bitmarket
-config.exchangeRates.exchanges.BTC.EUR = 'bitstamp';
+config.exchangeRates.exchanges.BTC.EUR = false;
 // BTC/RUB pair, supported: btce, exmo
-config.exchangeRates.exchanges.BTC.RUB = 'btce';
+config.exchangeRates.exchanges.BTC.RUB = false;
 // BTC/PLN pair, supported: bitmarket
 config.exchangeRates.exchanges.BTC.PLN = false;
 
@@ -70,10 +70,12 @@ config.exchangeRates.exchanges.BTC.PLN = false;
  */
 // Market watcher support (true - enabled, false - disabled)
 config.marketWatcher.enabled = false;
+// Graviex exchange support (true - enabled, false - disabled)
+config.marketWatcher.exchanges.graviex = true;
 // Poloniex exchange support (true - enabled, false - disabled)
-config.marketWatcher.exchanges.poloniex = true;
+config.marketWatcher.exchanges.poloniex = false;
 // Bittrex exchange support (true - enabled, false - disabled);
-config.marketWatcher.exchanges.bittrex = true;
+config.marketWatcher.exchanges.bittrex = false;
 // Interval in ms for updating candlestick data (default: 30 seconds)
 config.marketWatcher.candles.updateInterval = 30000;
 // Build candles based on trades form last 30 days

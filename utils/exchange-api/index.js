@@ -77,7 +77,7 @@ module.exports = function (config) {
 					if (res.error) {
 						return cb(res.error);
 					}
-					return cb(null, res.BTC_ONZ.last);
+					return cb(null, res.ticker.last);
 				},
 			],
 		},

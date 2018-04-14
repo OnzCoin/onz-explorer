@@ -48,12 +48,12 @@
         "enabled": true,
         "list": [
             {
-                "ip": "tnode1.onzcoin.com",
-                "port": 7000
+                "ip": "tnode11.onzcoin.com",
+                "port": 10998
             },
             {
-                "ip": "tnode2.onzcoin.com",
-                "port": 7000
+                "ip": "tnode12.onzcoin.com",
+                "port": 10998
             }
         ],
         "access": {

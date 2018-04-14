@@ -67,14 +67,14 @@ module.exports = function (config) {
 					if (res.error) {
 						return cb(res.error);
 					}
-					return cb(null, res.BTC_LSK.last);
+					return cb(null, res.BTC_ONZ.last);
 				},
 			],
 		},
 		ONZCNY: {
 			jubi: [
 				'Jubi',
-				'https://www.jubi.com/api/v1/ticker/?coin=lsk',
+				'https://www.jubi.com/api/v1/ticker/?coin=onz',
 				(res, cb) => {
 					if (res.last) {
 						return cb(null, res.last);
@@ -84,7 +84,7 @@ module.exports = function (config) {
 			],
 			bitbays: [
 				'Bitbays',
-				'https://bitbays.com/api/v1/ticker/?market=lsk_cny',
+				'https://bitbays.com/api/v1/ticker/?market=onz_cny',
 				(res, cb) => {
 					if (res.status === 200 && res.message === 'ok' && res.result.last) {
 						return cb(null, res.result.last);

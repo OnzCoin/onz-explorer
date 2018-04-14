@@ -1,0 +1,48 @@
+version: "3"
+services:
+
+  onz-explorer:
+    image: onz/explorer:latest
+    depends_on:
+      - explorer-cache
+      - freegeoip
+    ports:
+      - "127.0.0.1:6040:6040"
+    networks:
+      - onz-explorer
+      - localhost
+    restart: on-failure
+    env_file:
+      - ./docker-onz-core.env
+    environment:
+      - REDIS_HOST=explorer-cache
+      - FREEGEOIP_HOST=freegeoip
+
+  explorer-cache:
+    image: redis:alpine
+    networks:
+      - onz-explorer
+    restart: on-failure
+
+  explorer-cache-candles:
+    image: onz/explorer:latest
+    depends_on:
+      - explorer-cache
+    networks:
+      - onz-explorer
+    environment:
+      - REDIS_HOST=explorer-cache
+    command: ./node_modules/grunt-cli/bin/grunt candles:build
+
+  freegeoip:
+    image: fiorix/freegeoip
+    networks:
+      - onz-explorer
+    restart: on-failure
+
+
+networks:
+  onz-explorer:
+  localhost:
+    external: true
+

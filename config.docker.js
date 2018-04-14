@@ -1,5 +1,3 @@
-
-
 const config = require('./config.global');
 
 /**
@@ -16,19 +14,19 @@ config.sslcert = '/path/onzcoin.com.crt';
 /**
  * ONZ node
  */
-config.onz.host = 'texplorer.onzcoin.com';
-config.onz.port = 10998;
+config.onz.host = process.env.ONZ_HOST;
+config.onz.port = process.env.ONZ_PORT;
 
 /**
  * FreeGeoIP server
  */
-config.freegeoip.host = 'texplorer.onzcoin.com';
+config.freegeoip.host = process.env.FREEGEOIP_HOST;
 config.freegeoip.port = 8080;
 
 /**
  * Redis server
  */
-config.redis.host = '127.0.0.1';
+config.redis.host = process.env.REDIS_HOST;
 config.redis.port = 6379;
 config.redis.db = 0;
 config.redis.password = '';
@@ -41,7 +39,7 @@ config.log.enabled = true;
 // Output for logs - can be device file or ordinary path
 config.log.file = './logs/explorer.log';
 // Log level - (trace, debug, info, warn, error)
-config.log.level = 'debug';
+config.log.level = 'info';
 
 /**
  * Header price tickers, Currency switcher

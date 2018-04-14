@@ -22,16 +22,28 @@ These programs and resources are required to install and run Onz Explorer
 
 - Freegeoip (<https://github.com/fiorix/freegeoip>) -- Freegeoip is used by the Network Monitor for IP address geo-location.
 
+  Linux:
   ```
-  wget https://github.com/fiorix/freegeoip/releases/download/v3.1.5/freegeoip-3.1.5-linux-amd64.tar.gz
-  tar -zxf freegeoip-3.1.5-linux-amd64.tar.gz
-  ln -s freegeoip-3.1.5-linux-amd64 freegeoip
+  wget https://github.com/fiorix/freegeoip/releases/download/v3.4.1/freegeoip-3.4.1-linux-amd64.tar.gz
+  tar -zxf freegeoip-3.4.1-linux-amd64.tar.gz
+  ln -s freegeoip-3.4.1-linux-amd64 freegeoip
+  nohup ./freegeoip/freegeoip > ./freegeoip/freegeoip.log 2>&1 &
+  ```
+  MacOS:
+  ```
+  wget https://github.com/fiorix/freegeoip/releases/download/v3.4.1/freegeoip-3.4.1-darwin-amd64.tar.gz
+  tar -zxf freegeoip-3.4.1-darwin-amd64.tar.gz
+  ln -s freegeoip-3.4.1-darwin-amd64 freegeoip
   nohup ./freegeoip/freegeoip > ./freegeoip/freegeoip.log 2>&1 &
   ```
 
 - Grunt.js (<http://gruntjs.com/>) -- Grunt is used to run eslint and unit tests.
 
   `sudo npm install -g grunt`
+
+- Bower (<https://bower.io/>) -- Bower is used to look after frontend libraries.
+
+  `sudo npm install -g bower`
 
 - PM2 (https://github.com/Unitech/pm2) -- PM2 manages the node process for Onz Explorer and handles log rotation (Highly Recommended)
 
@@ -79,10 +91,12 @@ npm install
  
  `SERVICE_NAME='your service name' CLIENT_ID='you client id' npm run build`
 
-
+## Post-deployment Actions
 
 #### Market Watcher
  Candlestick data needs to be initialized prior to starting Onz Explorer. During runtime candlestick data is updated automatically.
+
+This step writes data to the local Redis instance. Make sure that your application is already deployed and has access to the production Redis database. 
 
 To build candlestick data for each exchange run:
 
@@ -137,21 +151,85 @@ To stop Explorer after it has been started with `PM2`, issue the following comma
 
 `pm2 stop onz-explorer`
 
+## Docker
+
+### Using docker-compose
+
+Update `docker-onz-core.env` to choose your preferred node. You can easily switch between Mainnet and Testnet nodes by changing content of the env file.
+
+#### Starting application
+
+To start Explorer type the following command:
+
+```
+docker-compose up -d
+```
+
+It will use lastest available version from local hub by default.
+
+#### Stopping application
+
+The following command will remove all containers defined by the `docker-compose.yml`.
+
+```
+docker-compose down --volumes
+```
+
+The parameter `--volumes` will remove all associated volumes that would not be useful anyway - next instances after `docker-compose up` create new volumes so the data will not be reused.
+
+The example above will stop whole application gracefully but it leaves images in your repository. It is useful only if you plan to run the solution again. Otherwise you may want to clean up after these containers. You can use additional param for this purpose: `--rmi local` to remove untagged images. In case you want to remove all images related to this application add `--rmi all` to the `docker-compose` command.
+
+#### Building other version than latest
+
+If you want to build other version, you have to change the tag name in `docker-compose.yml`. You can also build from your local branch by adding `build .` under section called `onz-explorer:`.
+
+### Manual Docker deployment
+
+First, build a new docker image in your local repository.
+Replace `<TAG_NAME>` with the branch or tag name ex. `1.5.0`.
+
+```
+docker build https://github.com/OnzCoin/onz-explorer.git#<TAG_NAME> -t onz-explorer:<TAG_NAME>
+```
+
+Create dedicated virtual network for Onz. This method replaces deprecated Docker parameter `--link`. In this example the virtual network is called `onz-net`, but it may be changed to any other valid name. It is important to keep consistency and apply that name for every `--network` parameter used in commands below.
+
+```
+docker network create onz-net
+```
+
+Create containers with Redis and FreeGeoIP.
+```
+docker run --name=onz-redis --network=onz-net -d redis:alpine
+docker run --name=onz-freegeoip --network=onz-net --restart=always -d fiorix/freegeoip
+```
+Run the application within the same network that you created in the second step.
+
+Replace `<ONZ_NODE_IP>` and `<ONZ_NODE_PORT>` accordingly.
+Remember that in order to use any Onz node your IP must be whitelisted, or the node must be configured to accept unknown IPs.
+
+```
+docker run -p 6040:6040 \
+	-e ONZ_HOST=<ONZ_NODE_IP> \
+	-e ONZ_PORT=<ONZ_NODE_PORT> \
+	-e REDIS_HOST=onz-redis \
+	-e FREEGEOIP_HOST=onz-freegeoip \
+	--network=onz-net \
+	--name=onz-explorer \
+	-d onz-explorer:1.4.4
+```
+
+You may also want to initialize Market Watcher data.
+
+```
+docker exec -it onz-explorer ~/onz-explorer/node_modules/grunt/bin/grunt candles:build
+```
+
 ## Tests
 
 Before running any tests, please ensure Onz Explorer and Onz Client are configured to run on the Onz Testnet.
 
-Replace **config.js** with **config.test** file from the **test** directory:
-
-`cp test/config.test ./config.js`
-
-Replace the **config.json** for the Onz Client the corresponding file under the **test** directory:
-
-`cp test/config_onz.json  /PATH_TO_ONZ_DIR/config.json`
-
-Then restart the Onz Client (example):
-
-`pm2 restart /PATH_TO_ONZ_DIR/app.js`
+`bash ./e2e-test-setup.sh /PATH_TO_ONZ_DIR`
 
 Launch Onz Explorer (runs on port 6040):
 
@@ -212,7 +290,7 @@ You should have received a copy of the [GNU General Public License](https://gith
 
 ***
 
-This program also incorporates work previously released with lisk `0.7.0` (and earlier) versions under the [MIT License](https://opensource.org/licenses/MIT). To comply with the requirements of that license, the following permission notice, applicable to those parts of the code only, is included below:
+This program also incorporates work previously released with onz-explorer `1.1.0` (and earlier) versions under the [MIT License](https://opensource.org/licenses/MIT). To comply with the requirements of that license, the following permission notice, applicable to those parts of the code only, is included below:
 
 Copyright © 2016-2017 Lisk Foundation<br>
 Copyright © 2015 Crypti<br>

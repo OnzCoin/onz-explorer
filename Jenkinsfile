@@ -1,175 +1,91 @@
-def fail(reason) {
-  sh '''
-  ps aux > ps_log.log
-  netstat -tunap > netstat_log.log
-  '''
-
-  def pr_branch = ''
-  if (env.CHANGE_BRANCH != null) {
-    pr_branch = " (${env.CHANGE_BRANCH})"
+pipeline {
+	agent { node { label 'onz-explorer' } } 
+	environment { 
+		ONZ_VERSION = '0.9.14'
+		//
+		EXPLORER_PORT = "604$EXECUTOR_NUMBER"
+		ONZ_HOST = 'localhost'
+		REDIS_DB = "$EXECUTOR_NUMBER"
+		REDIS_HOST = 'localhost'
   }
-  slackSend color: 'danger', message: "Build #${env.BUILD_NUMBER} of <${env.BUILD_URL}|${env.JOB_NAME}>${pr_branch} failed (<${env.BUILD_URL}/console|console>, <${env.BUILD_URL}/changes|changes>)\nCause: ${reason}", channel: '#onz-explorer-jenkins'
-  currentBuild.result = 'FAILURE'
-  error("${reason}")
-}
-
-node('onz-explorer-01'){
-  try {
-    stage ('Prepare Workspace') {
-      deleteDir()
-      checkout scm
+	stages {
+		stage ('Build dependencies') {
+			steps {
+				sh 'npm install'
     }
-
-    stage ('Build Dependencies') {
-      try {
-        sh '''
-        # Install Deps
-        npm install
-        ./node_modules/protractor/bin/webdriver-manager update
-        '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, installation failed')
       }
+		stage ('Run ESLint') {
+			steps {
+				sh 'npm run eslint'
     }
-
-    stage ('Run Eslint') {
-      try {
-        sh '''
-        # Run Eslint
-        npm run eslint
-        '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, webpack failed')
       }
+		stage ('Build bundles') {
+			steps {
+				sh 'npm run build'
     }
-
-    stage ('Run Webpack Build') {
-      try {
+		}
+		stage ('Build candles') {
+			steps {
+				// marketwatcher needs to be enabled to builds candles
         sh '''
-        # Build Bundles
-        npm run build
         cp test/config.test ./config.js
+				grunt candles:build
         '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, webpack failed')
       }
     }
-
-    stage ('Build Candles') {
-      try {
+		stage ('Start Onz') {
+			steps {
+				dir("$WORKSPACE/$BRANCH_NAME/") {
+					ansiColor('xterm') {
         sh '''
-        N=${EXECUTOR_NUMBER:-0}
-        # Generate market data
-        REDIS_DB=$N grunt candles:build
+						rsync -axl --delete ~/onz-docker/examples/development/ ./
+						cp ~/blockchain_explorer.db.gz ./blockchain.db.gz
+						make coldstart
         '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, candles build failed')
-      }
-    }
-
-    stage ('Start Onz ') {
-      try {
-
+						// show some build-related info
+						sh '''
+						sha1sum ./blockchain.db.gz
+						docker-compose config
+						docker-compose ps
+						'''
+						// temp.
         sh '''
-        # work around core bug: config.json gets overwritten; use backup
-        cp test/config_onz.json ~/onz-test/config_stage.json
-        cd ~/onz-test
-        # disable redis
-        jq '.cacheEnabled = false' config_stage.json > config.json
-
-        if [[ ! $(pgrep -f '.*onz-test/app.js') ]]; then
-          JENKINS_NODE_COOKIE=dontKillMe bash onz.sh start
-        fi
-
+						docker-compose exec -T onz sed -i -r -e 's/(\\s*"topAccounts":)\\s*false,/\\1 true,/' config.json
+						docker-compose restart onz
         '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, onz-core failed')
       }
     }
-
+			}
+		}
     stage ('Start Explorer') {
-      try {
+			steps {
       sh '''
-      N=${EXECUTOR_NUMBER:-0}
-      LISTEN_PORT=604$N REDIS_DB=$N node $(pwd)/app.js &> ./explorer$N.log &
+				cd $WORKSPACE/$BRANCH_NAME
+				ONZ_PORT=$( docker-compose port onz 10998 |cut -d ":" -f 2 )
+				cd -
+				ONZ_PORT=$ONZ_PORT node app.js -c config.docker.js -p $EXPLORER_PORT &>/dev/null &
       sleep 20
       '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, Explorer failed to start')
       }
     }
-
     stage ('Run tests') {
-      try {
+			steps {
         sh '''
-        # Run Tests
-        N=${EXECUTOR_NUMBER:-0}
-        sed -i -r -e "s/6040/604$N/" test/node.js
-        REDIS_DB=$N npm run test
+				sed -i -r -e "s/6040/$EXPLORER_PORT/" test/node.js
+				npm run test
         '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, tests failed')
       }
     }
-
-    stage ('Run e2e tests') {
-      try {
-        sh '''
-        N=${EXECUTOR_NUMBER:-0}
-
-        # End to End test configuration
-        export DISPLAY=:9$N
-        Xvfb :9$N -ac -screen 0 1280x1024x24 &
-        ./node_modules/protractor/bin/webdriver-manager start --seleniumPort 443$N &
-
-        # Run E2E Tests
-        npm run e2e-test -- --params.baseURL http://localhost:604$N
-        '''
-      } catch (err) {
-        echo "Error: ${err}"
-        fail('Stopping build, e2e tests failed')
+    }
+	post {
+		always {
+			dir("$WORKSPACE/$BRANCH_NAME/") {
+				ansiColor('xterm') {
+					sh 'docker-compose logs || true'
+					sh 'make mrproper'
+    }
       }
-    }
-
-    stage ('Set milestone and cleanup') {
-      milestone 1
-      currentBuild.result = 'SUCCESS'
-    }
-
-  } catch(err) {
-    echo "Error: ${err}"
-  } finally {
-    sh '''
-    N=${EXECUTOR_NUMBER:-0}
-    pkill -f "Xvfb :9$N" -9 || true
-    pkill -f "webpack.*808$N" -9 || true
-    pkill -f "explorer$N.log" || true
-    '''
-    dir('node_modules') {
-      deleteDir()
-    }
-
-    def pr_branch = ''
-    if (env.CHANGE_BRANCH != null) {
-      pr_branch = " (${env.CHANGE_BRANCH})"
-    }
-    if (currentBuild.result == 'SUCCESS') {
-      /* delete all files on success */
-      deleteDir()
-      /* notify of success if previous build failed */
-      previous_build = currentBuild.getPreviousBuild()
-      if (previous_build != null && previous_build.result == 'FAILURE') {
-        slackSend color: 'good',
-                  message: "Recovery: build #${env.BUILD_NUMBER} of <${env.BUILD_URL}|${env.JOB_NAME}>${pr_branch} was successful.",
-                  channel: '#onz-explorer-jenkins'
-      }
+			archiveArtifacts artifacts: 'logs/*.log', allowEmptyArchive: true
     }
   }
 }
